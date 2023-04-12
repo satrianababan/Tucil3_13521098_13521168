@@ -19,7 +19,7 @@ class Coordinate:
         return ("(" + str(self.__latitude) + ", " + str(self.__longitude) + ")")
     
     def __eq__(self, other):
-        return ((self.__latitude == other.__latitude) and (self.__longitude == other.__longitude))
+        return ((self.getLatitude() == other.getLatitude()) and (self.getLongitude() == other.getLongitude()))
 
 # # Test
 # p1 = Coordinate()

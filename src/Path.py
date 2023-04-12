@@ -1,31 +1,24 @@
-from Node import *
+from LinkedNode import *
 from Graph import *
 import heapq
 
 class Path:
-    def __init__(self,graph:Graph,startNode:Node,goalNode:Node):
+    def __init__(self, graph: Graph, startNode: LinkedNode, goalNode: LinkedNode):
         self.__graph = graph
-        self.__listNodes = []
         self.__startNode = startNode
         self.__goalNode = goalNode
-        self.__currentNode = None
-        self.__pathCost = 0
-    
-    def getCurrentNode(self):
-        return self.__currentNode
-    
-    def getParentNode(self):
-        return self.__parentNode
+        self.__expandNode = startNode
+        self.__resultPath = []
 
-    def getGraph(self):
+    def getGraph(self) -> Graph:
         return self.__graph
+
+    def getExpandNode(self) -> LinkedNode:
+        return self.__expandNode
     
-    def getListNodes(self):
-        return self.__listNodes
-    
-    def __lt__(self,other):
-        return (self.__pathCost < other.__pathCost)
-    
+    def setExpandNodeCurrent(self, currentNode: Node):
+        self.__expandNode = currentNode
+
     def uniformCostSearch(self):
         liveNodes = []
         heapq.heappush(liveNodes, self.__startNode)
@@ -33,28 +26,28 @@ class Path:
         visitedNodes = set()
 
         while (len(liveNodes) > 0):
-            self.__currentNode = heapq.heappop(liveNodes)
+            self.__expandNode = heapq.heappop(liveNodes)
 
-            if(self.__currentNode == self.__goalNode):
-                while(self.__currentNode):
-                    self.__listNodes.append(self.__currentNode)
-                    self.__currentNode = self.__parentNode
-                self.__listNodes.reverse()
+            if(self.getExpandNode().getCurrentNode().getName() == self.__goalNode.getName()):
+                # while(self.getExpandNode().getCurrentNode()):
+                    # self.__resultPath.append(self.getExpandNode().getCurrentNode().getName())
+                    # tempNode = self.getExpandNode().getParentNode()
+                    # self.setExpandNodeCurrent(tempNode)
+                self.__resultPath.reverse()
                 return self.__displayPath()
-            
-            visitedNodes.add(self.getCurrentNode().getName())
 
-            for i in range(len(self.__graph)):
-                if((self.__graph.getAdjMatrix()[self.getCurrentNode().getName()][i] != 0) 
-                   and i not in visitedNodes):
-                    self.__pathCost = self.__pathCost + self.getGraph().getAdjMatrix()[self.getCurrentNode().getName()][i]
-                    newLiveNode = Node(i,None)
-                    heapq.heappush(liveNodes,newLiveNode)
-        return self.__displayPathNotFound
-    
+            visitedNodes.add(self.getExpandNode().getCurrentNode().getName())
+
+            for i in range(len(self.getGraph().getAdjMatrix())):
+                if((self.getGraph().getAdjMatrix()[self.getExpandNode().getCurrentNode().getName()][i] != 0) and i not in visitedNodes):
+                    newCost = self.getExpandNode().getNodeCost() + self.getGraph().getAdjMatrix()[self.getExpandNode().getCurrentNode().getName()][i]
+                    newLiveNode = LinkedNode(i,self.getGraph().getNode(i).getCoordinate(),self.getGraph().getNode(i),self.getExpandNode().getCurrentNode(),newCost)
+                    heapq.heappush(liveNodes, newLiveNode)
+        return self.__displayPathNotFound()
+
     def __displayPath(self):
-        print("Lintasan terpendek adalah " + self.getListNodes())
+        print("Lintasan ditemukan")
+        print(self.__resultPath)
 
     def __displayPathNotFound(self):
         print("Tidak ada lintasan dari simpul asal ke simpul tujuan")
-        

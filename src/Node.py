@@ -1,25 +1,24 @@
 from Coordinate import *
-
 class Node:
-    def __init__(self,name:int,coordinate=None):
+    def __init__(self, name: int, coordinate:Coordinate):
         self.__name = name
         self.__coordinate = coordinate
-    
+
     def getName(self):
         return self.__name
 
     def getCoordinate(self):
         return self.__coordinate
 
-    def setCoordinate(self,coordinate):
+    def setCoordinate(self, coordinate):
         self.__coordinate = coordinate
-    
+
     def __str__(self):
         return "Node " + self.__name.__str__() + ": " + self.__coordinate.__str__()
-    
-    def __eq__(self,other):
+
+    def __eq__(self, other):
         return ((self.getName() == other.getName()) and (self.getCoordinate() == other.getCoordinate()))
-    
+
 # # Test
 # p1 = Coordinate(1.3087,2.9104)
 # node1 = Node(1,p1)
