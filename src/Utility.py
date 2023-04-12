@@ -5,20 +5,23 @@ from Coordinate import *
 from math import *
 
 def read_file(filename):
-    with open(filename) as f:
-        nama = f.readline().strip().split()
-        banyak = len(nama)
+    # with open(filename) as f:
+        file = filename.read().splitlines()
+        banyak = int(file[0])
         matriks = []
         koordinat = []
+        matriksToFloat = [[0 for i in range(banyak)] for j in range(banyak)]
+        CoorToFloat = [[0 for i in range(2)] for j in range(banyak)]
         for i in range(banyak):
-            line = f.readline().strip().split()
+            line = file[i+2]
             matriks.append(line)
-        for j in range(banyak):
-            koor = f.readline().strip().split()
+            koor = file[i+2+banyak]
             koordinat.append(koor)
-        MatrixToPoint(matriks)
-        CoorToPoint(koordinat)
-        return nama,matriks,koordinat
+            matriksToFloat[i] = [float(x) for x in matriks[i].split()]
+            CoorToFloat[i] = [float(x) for x in koordinat[i].split()]
+        # MatrixToPoint(matriks)
+        # CoorToPoint(koordinat)
+        return file,matriksToFloat,CoorToFloat
     
 # Membaca file graf
 def read_graph(filename):
@@ -102,15 +105,15 @@ def visualize_graph(nama,matriks,coor):
             if(matriks[j][k]!=0):
                 graph.add_edge(nama[j],nama[k],weight = int(matriks[j][k]) )
 
-def MatrixToPoint(matriks):
-    for i in range(len(matriks)):
-        for j in range(len(matriks[0])):
-            matriks[i][j] = float(matriks[i][j])
+# def MatrixToPoint(matriks):
+#     for i in range(len(matriks)):
+#         for j in range(len(matriks[i])):
+#             matriks[i][j] = float(matriks[i][j])
 
-def CoorToPoint(matriks):
-    for i in range(len(matriks)):
-        for j in range(len(matriks[0])):
-            matriks[i][j] = float(matriks[i][j])
+# def CoorToPoint(matriks):
+#     for i in range(len(matriks)):
+#         for j in range(len(matriks[0])):
+#             matriks[i][j] = float(matriks[i][j])
 
 def matrixToGraph(matrix):
     graph = {}

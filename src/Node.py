@@ -7,22 +7,24 @@ class Node:
 
     def getName(self):
         return self.__name
+    
+    def getLatitude(self):
+        return self.__latitude
+
+    def getLongitude(self):
+        return self.__longitude
+
+    def setLatitude(self, latitude):
+        self.__latitude = latitude
+    
+    def setLongitude(self, longitude):
+        self.__longitude = longitude
 
     def getCoordinate(self):
         return self.__coordinate
 
     def setCoordinate(self, coordinate):
         self.__coordinate = coordinate
-
-    def haversine(self, node2, radius = 6371):
-        lat1 = radians(self.getCoordinate().getLatitude())
-        lat2 = radians(node2.getCoordinate().getLatitude())
-        dLat = radians(lat2 - lat1)
-        dLon = radians(node2.getCoordinate().getLongitude() - self.getCoordinate().getLongitude())
-        a = sin(dLat/2)**2 + cos(lat1)*cos(lat2)*sin(dLon/2)**2
-        c = 2*asin(sqrt(a))
-        distance = radius * c
-        return distance
 
     def __str__(self):
         return "Node " + self.__name.__str__() + ": " + self.__coordinate.__str__()

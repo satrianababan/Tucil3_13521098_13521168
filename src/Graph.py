@@ -1,6 +1,5 @@
 from Node import *
 
-
 class Graph:
     def __init__(self, nodes, adjMatrix):
         self.__nodes = nodes

@@ -11,10 +11,7 @@ def uniformCostSearch(graph, listCoordinate, startNode, goalNode):
     visitedNodes = set()
 
     while liveNodes:
-
         expandNode = heapq.heappop(liveNodes)
-
-
         if expandNode.index == goalNode:
             path = []
             while expandNode:

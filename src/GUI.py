@@ -9,12 +9,10 @@ from matplotlib.backends.backend_tkagg import (
     FigureCanvasTkAgg,
     NavigationToolbar2Tk
 )
-import Utility
+from Utility import *
 from Path import *
-import Coordinate
-import Graph
-import Node
-import Parser
+from UCS import *
+from AStar import *
 
 window = tk.Tk()
 window.title("Find Route")
@@ -56,8 +54,8 @@ def search():
         input_check.config(text='Belum ada file')
     else:
         input_check.config(text=tail)
-        nama,matriks,koor = astar.read_file(filedirect)
-        if(Path.aStar.checkMatrix(matriks)):
+        nama,matriks,koor = aStar.read_file(filedirect)
+        if(aStar.checkMatrix(matriks)):
             graf = Path.aStar.visualize_graph(nama,matriks,koor)
             global matrixGobal
             global matrix
@@ -107,7 +105,7 @@ def astar_search():
 
 def ucs_search():
     if(filedirect!=''):
-        graph = Path.uniformCostSearch.read_graph(filedirect)
+        graph = uniformCostSearch.read_graph(filedirect)
         a = click.get()
         b = click2.get()
         if(len(Path.uniformCostSearch.ucs()) > 2):

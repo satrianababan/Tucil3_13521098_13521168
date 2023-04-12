@@ -22,19 +22,19 @@ def aStar(graph:Graph, coordinate,startNode:int, goalNode:int):
                 path.append(expandNode.index)
                 expandNode = expandNode.parent
             path.reverse()
-            return path
+            return displayPath(graph,startNode,goalNode,path, coordinate)
         
         visitedNodes.add(expandNode.index)
 
         for i in range(len(graph.getAdjMatrix())):
             if graph.getAdjMatrix()[expandNode.index][i] != 0 and i not in visitedNodes:
-                node1 = Node(graph.getNode(i),coordinate[i])
-                node2 = Node(graph.getNode(goalNode),coordinate[goalNode])
+                # node1 = Node(graph.getNode(i),coordinate[i])
+                # node2 = Node(graph.getNode(goalNode),coordinate[goalNode])
                 radius = 6371
-                lat1 = radians(node1.getCoordinate().getLatitude())
-                lat2 = radians(node2.getCoordinate().getLatitude())
+                lat1 = radians(coordinate[i][0])
+                lat2 = radians(coordinate[goalNode][0])
                 dLat = radians(lat2 - lat1)
-                dLon = radians(node2.getCoordinate().getLongitude() - node1.getCoordinate().getLongitude())
+                dLon = radians(coordinate[goalNode][1] - coordinate[i][1])
                 a = sin(dLat/2)**2 + cos(lat1)*cos(lat2)*sin(dLon/2)**2
                 c = 2*asin(sqrt(a))
                 distance = radius * c
@@ -43,7 +43,7 @@ def aStar(graph:Graph, coordinate,startNode:int, goalNode:int):
     return displayPathNotFound()
 
 def displayPath(graph,startNode,goalNode,path,listCoordinate):
-    print(f"Lintasan terpendek dari {listCoordinate[startNode]} ke {listCoordinate[goalNode]} adalah {path} dengan biaya sebesar {sum(graph[path[i-1]][path[i]] for i in range(1, len(path)))}.")
+    print(f"Lintasan terpendek dari {listCoordinate[startNode]} ke {listCoordinate[goalNode]} adalah {path} dengan biaya sebesar {sum(graph.getAdjMatrix()[path[i-1]][path[i]] for i in range(1, len(path)))}.")
 
 def displayPathNotFound():
     print("Tidak ada lintasan dari simpul asal ke simpul tujuan")
