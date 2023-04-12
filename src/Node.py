@@ -1,8 +1,8 @@
 from Coordinate import *
 
 class Node:
-    def __init__(self,name,coordinate=None):
-        self.__name = str(name)
+    def __init__(self,name:int,coordinate=None):
+        self.__name = name
         self.__coordinate = coordinate
     
     def getName(self):
@@ -15,9 +15,17 @@ class Node:
         self.__coordinate = coordinate
     
     def __str__(self):
-        return "Node " + self.__name + ": " + self.__coordinate.__str__()
+        return "Node " + self.__name.__str__() + ": " + self.__coordinate.__str__()
     
-# Test
-# p1 = Coordinate(1.3,2.9)
+    def __eq__(self,other):
+        return ((self.getName() == other.getName()) and (self.getCoordinate() == other.getCoordinate()))
+    
+# # Test
+# p1 = Coordinate(1.3087,2.9104)
 # node1 = Node(1,p1)
+# p2 = Coordinate(1.3087,2.9104)
+# node2 = Node(1,p2)
 # print(node1)
+# print(node2)
+# if (node1 == node2):
+#     print("node 1 sama dengan node 2")
