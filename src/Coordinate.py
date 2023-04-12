@@ -17,16 +17,18 @@ class Coordinate:
     
     def __str__(self):
         return ("(" + str(self.__latitude) + ", " + str(self.__longitude) + ")")
+    
+    def __eq__(self, other):
+        return ((self.__latitude == other.__latitude) and (self.__longitude == other.__longitude))
 
 # # Test
 # p1 = Coordinate()
 # print(p1.getLatitude())
 # print(p1.getLongitude())
-# p1.setLatitude(1)
-# p1.setLongitude(1)
-# print(p1.getLatitude())
-# print(p1.getLongitude())
-# p2 = Coordinate(2,2)
-# print(p2.getLatitude())
-# print(p2.getLongitude())
+# p1.setLatitude(1.654789)
+# p1.setLongitude(1.076)
+# print(p1)
+# p2 = Coordinate(1.654789,1.076)
 # print(p2)
+# if (p1 == p2):
+#     print("p1 sama dengan p2")
