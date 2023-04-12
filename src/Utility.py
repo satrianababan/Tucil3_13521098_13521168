@@ -1,7 +1,7 @@
 import networkx as nx
 import matplotlib.pyplot as plt
-from Node import Node
-from Coordinate import Coordinate
+from Node import *
+from Coordinate import *
 from math import *
 
 def read_file(filename):
@@ -84,16 +84,6 @@ def getIDXname(arr, name):
             return i
         break
     return -1
-
-def haversine(node1:Node, node2:Node, radius = 6371):
-    lat1 = radians(node1.getCoordinate().getLatitude())
-    lat2 = radians(node2.getCoordinate().getLatitude())
-    dLat = radians(lat2 - lat1)
-    dLon = radians(node2.getCoordinate().getLongitude() - node1.getCoordinate().getLongitude())
-    a = sin(dLat/2)**2 + cos(lat1)*cos(lat2)*sin(dLon/2)**2
-    c = 2*asin(sqrt(a))
-    distance = radius * c
-    return distance
 
 def distance(graph,list):
     hasil = 0
