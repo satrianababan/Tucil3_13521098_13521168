@@ -1,3 +1,5 @@
+from typing import Any
+
 NUMBER = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 NEWLINE = '\n'
 DOT = '.'
@@ -29,7 +31,7 @@ class Parser:
             fraction = fraction + (int(frac[i]) * (10 ** (-degree)))
         return fraction
 
-    def parseFile(self) -> list[list[float]]:
+    def parseFile(self) -> Any:
         contents = self.openFile()
         listContents = list(contents)
         listInt = []
