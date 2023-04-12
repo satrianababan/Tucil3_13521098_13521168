@@ -1,4 +1,5 @@
 from Node import *
+from typing import Any
 
 class LinkedNode(Node):
     def __init__(self, name:int, coordinate: Coordinate, currentNode:Node, parentNode:Node, nodeCost=0):
@@ -7,10 +8,10 @@ class LinkedNode(Node):
         self.__parentNode = parentNode
         self.__nodeCost = nodeCost
 
-    def getCurrentNode(self):
+    def getCurrentNode(self) -> Any:
         return self.__currentNode
 
-    def getParentNode(self) -> Node:
+    def getParentNode(self) -> Any:
         return self.__parentNode
 
     def getNodeCost(self) -> float:
