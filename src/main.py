@@ -27,6 +27,9 @@ if __name__ == "__main__":
     goal = LinkedNode(4,c4,n4,n4)
     pathFinder = Path(inputGraph, start, goal)
     pathFinder.uniformCostSearch()
+
+    # astarFinder = Astar(inputGraph)
+    # astarFinder.astar(n0, n4)
     # except Exception as e:
     #     print(e)
     #     exit()
