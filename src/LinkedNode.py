@@ -1,27 +1,23 @@
-from Node import *
-from typing import Any
-
-class LinkedNode(Node):
-    def __init__(self, name:int, coordinate: Coordinate, currentNode:Node, parentNode:Node, nodeCost=0):
-        super().__init__(name,coordinate)
-        self.__currentNode = currentNode
-        self.__parentNode = parentNode
+class LinkedNode():
+    def __init__(self,currentNode:int,parentNode=None, nodeCost=0):
+        self.__currentNodeName = currentNode
+        self.__parentNodeName = parentNode
         self.__nodeCost = nodeCost
 
-    def getCurrentNode(self) -> Any:
-        return self.__currentNode
+    def getCurrentNodeName(self) -> int:
+        return self.__currentNodeName
 
-    def getParentNode(self) -> Any:
-        return self.__parentNode
+    def getParentNodeName(self) -> int:
+        return self.__parentNodeName
 
     def getNodeCost(self) -> float:
         return self.__nodeCost
 
-    def setCurrentNode(self, currentNode):
-        self.__currentNode = currentNode
+    def setCurrentNodeName(self, currentNodeName):
+        self.__currentNodeName = currentNodeName
 
-    def setParentNode(self, parentNode):
-        self.__parentNode = parentNode
+    def setParentNodeName(self, parentNodeName):
+        self.__parentNodeName = parentNodeName
 
     def setNodeCost(self, nodeCost):
         self.__nodeCost = nodeCost
