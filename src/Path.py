@@ -1,9 +1,7 @@
 from LinkedNode import *
 from Graph import *
-import heapq
-from math import *
-import copy
 from Utility import *
+import heapq
 
 class Path:
     def __init__(self, graph: Graph, startNode: Node, goalNode: Node):
@@ -75,7 +73,7 @@ class Path:
 
             for i in range(len(self.getGraph().getAdjMatrix())):
                 if((self.getGraph().getAdjMatrix()[self.getExpandNode().getCurrentNodeName()][i] != 0) and i not in visitedNodes):
-                    newCost = self.getExpandNode().getNodeCost() + self.getGraph().getAdjMatrix()[self.getExpandNode().getCurrentNodeName()][i] + haversine(self.getGraph().getAdjMatrix()[self.getExpandNode().getCurrentNodeName()][i], self.__goalNode)
+                    newCost = self.getExpandNode().getNodeCost() + self.getGraph().getAdjMatrix()[self.getExpandNode().getCurrentNodeName()][i] + haversine(self.getGraph().getNode(i), self.__goalNode)
                     newLiveNode = LinkedNode(i,self.getExpandNode().getCurrentNodeName(),newCost)
                     heapq.heappush(liveNodes, newLiveNode)
         return self.__displayPathNotFound()
@@ -84,6 +82,7 @@ class Path:
     def __displayPath(self):
         print("Lintasan terpendek adalah ", end="")
         print(self.__resultPath)
+        self.__resultPath.clear()
 
     def __displayPathNotFound(self):
         print("Tidak ada lintasan dari simpul asal ke simpul tujuan")
