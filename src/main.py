@@ -23,8 +23,8 @@ if __name__ == "__main__":
     for node in listNodes:
         print(node)
     inputGraph = Graph(listNodes, adjMatrix)
-    start = LinkedNode(0,c0,n0,n0)
-    goal = LinkedNode(4,c4,n4,n4)
+    start = Node(0,c0)
+    goal = Node(4,c4)
     pathFinder = Path(inputGraph, start, goal)
     pathFinder.uniformCostSearch()
 
