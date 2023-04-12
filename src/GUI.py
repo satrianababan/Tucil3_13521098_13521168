@@ -4,13 +4,13 @@ from tkinter import filedialog
 from matplotlib.figure import Figure
 import matplotlib.pyplot as plt
 import os
+import networkx as nx
 from matplotlib.backends.backend_tkagg import (
     FigureCanvasTkAgg,
     NavigationToolbar2Tk
 )
-import Astar
 import Utility
-from Path import Path
+from Path import *
 import Coordinate
 import Graph
 import Node
@@ -37,7 +37,7 @@ chooseMethod.grid(column=0,row=10)
 choosePoint = tk.Label(window,text="Pilih titik")
 choosePoint.grid(column=0,row=6)
 
-ucs = tk.Button(window,text="UCS",command=lambda:UCSalgo())
+ucs = tk.Button(window,text="UCS",command=lambda:ucs_search())
 ucs.grid(column=0,row=11)
 astar = tk.Button(window,text="A*",command=lambda:astar_search())
 astar.grid(column=0,row=12)
@@ -57,8 +57,8 @@ def search():
     else:
         input_check.config(text=tail)
         nama,matriks,koor = astar.read_file(filedirect)
-        if(astar.cekMatrix(matriks)):
-            graf = astar.visualgrafkoor(nama,matriks,koor)
+        if(Path.aStar.checkMatrix(matriks)):
+            graf = Path.aStar.visualize_graph(nama,matriks,koor)
             global matrixGobal
             global matrix
             global globalCoor
@@ -68,7 +68,7 @@ def search():
             #-------visualisasi-----------
             f = plt.figure(figsize=(6.5, 4.45), dpi=100)
             ax = f.add_subplot(111)
-            astar.draw_graph_koor(graf)
+            Path.aStar.draw_graph_koor(graf)
             canvas = FigureCanvasTkAgg(f, master=window)
             canvas.draw()
             canvas.get_tk_widget().grid(row=1, column=2,rowspan=10)
@@ -86,7 +86,7 @@ def search():
 def astar_search():
     if(filedirect!=''):
         if(matrix[0]!="empty" and matrixGobal!=[] and globalCoor!=[]):
-            graph = astar.matrixToGraph(matrixGobal)
+            graph = Path.aStar.matrixToGraph(matrixGobal)
             hasil = astar.astar(graph,astar.getIDXName(matrix,click.get()),astar.getIDXName(matrix,click2.get()),globalCoor)
             if(hasil!=None):
                 rute = astar.printRute(hasil,matrix)

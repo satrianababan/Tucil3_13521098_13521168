@@ -3,7 +3,35 @@ import matplotlib.pyplot as plt
 from Node import Node
 from Coordinate import Coordinate
 from math import *
-    
+
+def read_file(filename):
+    with open(filename) as f:
+        nama = f.readline().strip().split()
+        banyak = len(nama)
+        matriks = []
+        koordinat = []
+        for i in range(banyak):
+            line = f.readline().strip().split()
+            matriks.append(line)
+        for j in range(banyak):
+            koor = f.readline().strip().split()
+            koordinat.append(koor)
+        MatrixToPoint(matriks)
+        CoorToPoint(koordinat)
+        return nama,matriks,koordinat
+# Membaca file graf
+def read_graph(filename):
+    with open(filename) as f:
+        nodes = f.readline().strip().split()
+        n = len(nodes)
+        graph = nx.Graph()
+        graph.add_nodes_from(nodes)
+        for i in range(n):
+            line = f.readline().strip().split()
+            for j in range(n):
+                if line[j] != '0':
+                    graph.add_edge(nodes[i], nodes[j], weight=int(line[j]))
+        return graph
 def addPoint(graph, point):
     if point not in graph:
         graph[point] = []
@@ -58,3 +86,33 @@ def haversine(node1:Node, node2:Node, radius = 6371):
     c = 2*asin(sqrt(a))
     distance = radius * c
     return distance
+
+def visualize_graph(nama,matriks,coor):
+    graph = nx.Graph()
+    for i in range(len(nama)):
+        graph.add_node(nama[i],pos=(coor[i][0],coor[i][1]))
+    for j in range(len(nama)):
+        for k in range(len(nama)):
+            if(matriks[j][k]!=0):
+                graph.add_edge(nama[j],nama[k],weight = int(matriks[j][k]) )
+def MatrixToPoint(matriks):
+    for i in range(len(matriks)):
+        for j in range(len(matriks[0])):
+            matriks[i][j] = float(matriks[i][j])
+def CoorToPoint(matriks):
+    for i in range(len(matriks)):
+        for j in range(len(matriks[0])):
+            matriks[i][j] = float(matriks[i][j])
+def matrixToGraph(matrix):
+    graph = {}
+    for i in range(len(matrix)):
+        addPoint(graph, i)
+        for j in range(len(matrix[i])):
+            if matrix[i][j] != 0:
+                addEdge(graph, i, j, matrix[i][j])
+    return graph
+def drawGraphCoor(graph):
+    pos=nx.get_node_attributes(graph,'pos')
+    nx.draw(graph,pos,with_labels=True, font_weight='bold')
+    labels = nx.get_edge_attributes(graph, 'weight')
+    nx.draw_networkx_edge_labels(graph, pos, edge_labels=labels)
