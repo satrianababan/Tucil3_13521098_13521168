@@ -86,7 +86,13 @@ def haversine(node1:Node, node2:Node, radius = 6371):
     c = 2*asin(sqrt(a))
     distance = radius * c
     return distance
-
+def distance(graph,list):
+    hasil = 0
+    for i in range(len(list)-1):
+        for j in range(len(graph[list[i]])):
+            if(graph[list[i]][j][0]==list[i+1]):
+                hasil+=graph[list[i]][j][1]
+    return hasil
 def visualize_graph(nama,matriks,coor):
     graph = nx.Graph()
     for i in range(len(nama)):

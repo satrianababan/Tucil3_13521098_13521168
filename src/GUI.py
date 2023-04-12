@@ -26,7 +26,7 @@ Labelimage.pack()
 
 labelinput = tk.Label(window,text="Input File")
 labelinput.grid(column=0,row=2)
-toSearch = tk.Button(window,text="Select",command=lambda:search())
+toSearch = tk.Button(window,text="Select",command=lambda:search(),bg = 'lightblue')
 toSearch.grid(column=0,row=3)
 input_check = tk.Label(window,text="Belum ada file terpilih")
 input_check.grid(column=0,row=4)
@@ -37,9 +37,9 @@ chooseMethod.grid(column=0,row=10)
 choosePoint = tk.Label(window,text="Pilih titik")
 choosePoint.grid(column=0,row=6)
 
-ucs = tk.Button(window,text="UCS",command=lambda:ucs_search())
+ucs = tk.Button(window,text="UCS",command=lambda:ucs_search(),bg='lightblue' )
 ucs.grid(column=0,row=11)
-astar = tk.Button(window,text="A*",command=lambda:astar_search())
+astar = tk.Button(window,text="A*",command=lambda:astar_search(),bg='lightblue' )
 astar.grid(column=0,row=12)
 
 filedirect = ''
@@ -90,7 +90,7 @@ def astar_search():
             hasil = astar.astar(graph,astar.getIDXName(matrix,click.get()),astar.getIDXName(matrix,click2.get()),globalCoor)
             if(hasil!=None):
                 rute = astar.printRute(hasil,matrix)
-                jrk = astar.jarak(graph,hasil)
+                jrk = astar.distance(graph,hasil)
                 result.config(text=rute)
                 distance.config(text=jrk)
                 graphvis = astar.visualgrafkoor(matrix,matrixGobal,globalCoor)
@@ -157,7 +157,7 @@ jarak.grid(column=0,row=15)
 distance = tk.Label(window,text="")
 distance.grid(column=1,row=15,columnspan=2)
 
-judul = tk.Label(window,text="Selamat datang di pensearchan rute")
+judul = tk.Label(window,text="Selamat datang di Path Finder")
 judul.grid(column=0,row=0)
 
 window.mainloop()
