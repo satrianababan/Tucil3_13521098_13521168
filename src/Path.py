@@ -3,16 +3,7 @@ from Graph import *
 import heapq
 from math import *
 import copy
-
-def haversine(node1:Node, node2:Node, radius = 6371):
-        lat1 = radians(node1.getCoordinate().getLatitude())
-        lat2 = radians(node2.getCoordinate().getLatitude())
-        dLat = radians(lat2 - lat1)
-        dLon = radians(node2.getCoordinate().getLongitude() - node1.getCoordinate().getLongitude())
-        a = sin(dLat/2)**2 + cos(lat1)*cos(lat2)*sin(dLon/2)**2
-        c = 2*asin(sqrt(a))
-        distance = radius * c
-        return distance
+from Utility import *
 
 class Path:
     def __init__(self, graph: Graph, startNode: Node, goalNode: Node):
@@ -63,30 +54,29 @@ class Path:
 
     def aStar(self):
         liveNodes = []
-        start = LinkedNode(self.getStartNode().getName())
-        start.setNodeCost(haversine(start.getCurrentNode(), self.__goalNode.getCurrentNode()))
-        heapq.heappush(liveNodes, start)
+        self.__expandNode = LinkedNode(self.getStartNode().getName())
+        self.__expandNode.setNodeCost(haversine(self.getStartNode(), self.getGoalNode()))
+        heapq.heappush(liveNodes, self.__expandNode)
 
         visitedNodes = set()
 
         while (len(liveNodes) > 0):
             self.__expandNode = heapq.heappop(liveNodes)
 
-            if(self.getExpandNode().getCurrentNode().getName() == self.__goalNode.getName()):
-                while(self.getExpandNode().getCurrentNode().getName() != self.__startNode.getName()):
-                    self.__resultPath.append(self.getExpandNode().getCurrentNode().getName())
-                    tempNode = self.getExpandNode().getParentNode()
-                    self.setExpandNodeCurrent(tempNode)
-                self.__resultPath.append(self.getExpandNode().getCurrentNode().getName())
+            if(self.getExpandNode().getCurrentNodeName() == self.__goalNode.getName()):
+                while(self.__expandNode != self.getStartNode().getName()):
+                    self.__resultPath.append(self.getExpandNode().getCurrentNodeName())
+                    self.__expandNode = self.getExpandNode().getParentNodeName()
+                self.__resultPath.append(self.getExpandNode())
                 self.__resultPath.reverse()
                 return self.__displayPath()
 
-            visitedNodes.add(self.getExpandNode().getCurrentNode().getName())
+            visitedNodes.add(self.getExpandNode().getCurrentNodeName())
 
             for i in range(len(self.getGraph().getAdjMatrix())):
-                if((self.getGraph().getAdjMatrix()[self.getExpandNode().getCurrentNode().getName()][i] != 0) and i not in visitedNodes):
-                    newCost = self.getExpandNode().getNodeCost() + self.getGraph().getAdjMatrix()[self.getExpandNode().getCurrentNode().getName()][i] + haversine(self.getGraph().getAdjMatrix()[self.getExpandNode().getCurrentNode().getName()][i], self.__goalNode.getCurrentNode())
-                    newLiveNode = LinkedNode(i,self.getGraph().getNode(i).getCoordinate(),self.getGraph().getNode(i),self.getExpandNode().getCurrentNode(),newCost)
+                if((self.getGraph().getAdjMatrix()[self.getExpandNode().getCurrentNodeName()][i] != 0) and i not in visitedNodes):
+                    newCost = self.getExpandNode().getNodeCost() + self.getGraph().getAdjMatrix()[self.getExpandNode().getCurrentNodeName()][i] + haversine(self.getGraph().getAdjMatrix()[self.getExpandNode().getCurrentNodeName()][i], self.__goalNode)
+                    newLiveNode = LinkedNode(i,self.getExpandNode().getCurrentNodeName(),newCost)
                     heapq.heappush(liveNodes, newLiveNode)
         return self.__displayPathNotFound()
         
