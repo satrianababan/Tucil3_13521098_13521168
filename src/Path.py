@@ -29,10 +29,11 @@ class Path:
             self.__expandNode = heapq.heappop(liveNodes)
 
             if(self.getExpandNode().getCurrentNode().getName() == self.__goalNode.getName()):
-                # while(self.getExpandNode().getCurrentNode()):
-                    # self.__resultPath.append(self.getExpandNode().getCurrentNode().getName())
-                    # tempNode = self.getExpandNode().getParentNode()
-                    # self.setExpandNodeCurrent(tempNode)
+                while(self.getExpandNode().getCurrentNode().getName() != self.__start.getName()):
+                    self.__resultPath.append(self.getExpandNode().getCurrentNode().getNumber())
+                    tempNode = self.getExpandNode().getParentNode()
+                    self.setExpandNodeCurrent(tempNode)
+                self.__resultPath.append(self.getExpandNode().getCurrentNode().getName())
                 self.__resultPath.reverse()
                 return self.__displayPath()
 
@@ -40,7 +41,7 @@ class Path:
 
             for i in range(len(self.getGraph().getAdjMatrix())):
                 if((self.getGraph().getAdjMatrix()[self.getExpandNode().getCurrentNode().getName()][i] != 0) and i not in visitedNodes):
-                    newCost = self.getExpandNode().getNodeCost() + self.getGraph().getAdjMatrix()[self.getExpandNode().getCurrentNode().getName()][i]
+                    newCost = self.getExpandNde().getNodeCost() + self.getGraph().getAdjMatrix()[self.getExpandNode().getCurrentNode().getName()][i]
                     newLiveNode = LinkedNode(i,self.getGraph().getNode(i).getCoordinate(),self.getGraph().getNode(i),self.getExpandNode().getCurrentNode(),newCost)
                     heapq.heappush(liveNodes, newLiveNode)
         return self.__displayPathNotFound()
