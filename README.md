@@ -58,7 +58,7 @@ heuristik yang dipakai adalah jarak garis lurus dari suatu titik ke tujuan.
 2. Baris pertama adalah banyak simpul
 3. Baris kedua adalah nama setiap simpul yang berupa bilangan bulat terurut dimulai dari 0 dan dipisahkan oleh spasi. Contohnya, jika terdapat lima simpul, maka baris kedua ditulis sebagai berikut `0 1 2 3 4` 
 4. Jika banyak simpul adalah N, maka N baris selanjutnya adalah matriks ketetanggaan berbobot yang
-berukuran NxN
+berukuran NxN dan simetris
 5. N baris selanjutnya adalah koordinat yang terdiri dari garis lintang dan garis bujur yang dipisahkan
 oleh spasi
 
