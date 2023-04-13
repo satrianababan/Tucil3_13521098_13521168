@@ -43,6 +43,10 @@ heuristik yang dipakai adalah jarak garis lurus dari suatu titik ke tujuan.
     │ 
     ├───test
         ├───output
+        |   ├───alunalunbandung.png
+        |   ├───buahbatu.png
+        |   ├───gedebage.png
+        |   ├───itb.png
         ├───alunalunbandung.txt
         ├───buahbatu.txt
         ├───gedebage.txt
