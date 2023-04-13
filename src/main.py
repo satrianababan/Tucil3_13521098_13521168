@@ -22,8 +22,8 @@ if __name__ == "__main__":
         print("Visualisasi graf dengan representasi list ketetanggaan:")
         inputGraph.displayAdjList()
         GraphVisualize = filename.split(".")[0] + "png"
-        UCSVisualize = filename.split(".")[0] + "UCS.png"
-        AstarVisualize = filename.split(".")[0] + "Astar.png"
+        UCSVisualize = filename.split(".")[0] + "-UCS.png"
+        AstarVisualize = filename.split(".")[0] + "-A*.png"
         inputGraph.drawGraph()
 
         startNode = int(input("Masukkan simpul asal: "))
@@ -37,7 +37,7 @@ if __name__ == "__main__":
             uniformCostSearch(inputGraph, startNode, goalNode, UCSVisualize, listCoordinate)
             
         elif method == 2:
-            aStar(inputGraph,listCoordinate, startNode,goalNode, AstarVisualize)
+            aStar(inputGraph,listCoordinate, startNode,goalNode)
 
         else:
             print("Pilihan salah")

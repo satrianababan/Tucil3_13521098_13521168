@@ -6,15 +6,12 @@ from Utility import *
 from Node import *
 
 def aStar(graph:Graph, coordinate,startNode:int, goalNode:int):
-
     liveNodes = []
     heapq.heappush(liveNodes, LinkedNode(startNode))
-
     visitedNodes = set()
 
     while liveNodes:
         expandNode = heapq.heappop(liveNodes)
-
         if expandNode.index == goalNode:
             path = []
             while expandNode:
