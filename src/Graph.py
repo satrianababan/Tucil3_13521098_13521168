@@ -20,11 +20,16 @@ class Graph:
     def displayAdjList(self):
         adjMatrix = self.getAdjMatrix()
         for i in range(len(adjMatrix)):
-            print(i, end='')
-            for j in range(len(adjMatrix[i])):
+            FIRSTELMT = True
+            print(str(i) + " --> [", end='')
+            for j in range(1,len(adjMatrix[i])):
                 if(adjMatrix[i][j] != 0):
-                    print(" --> " + str(j), end = '')
-            print()
+                    if(FIRSTELMT):
+                        print(j, end='')
+                        FIRSTELMT = False
+                    else:
+                        print(", " + str(j),end='')
+            print("]")
 
     def normalizeGraph(self):
         graph = nx.Graph()
