@@ -19,8 +19,6 @@ def read_file(filename):
             koordinat.append(koor)
             matriksToFloat[i] = [float(x) for x in matriks[i].split()]
             CoorToFloat[i] = [float(x) for x in koordinat[i].split()]
-        # MatrixToPoint(matriks)
-        # CoorToPoint(koordinat)
         return file,matriksToFloat,CoorToFloat
     
 # Membaca file graf
@@ -104,16 +102,6 @@ def visualize_graph(nama,matriks,coor):
         for k in range(len(nama)):
             if(matriks[j][k]!=0):
                 graph.add_edge(nama[j],nama[k],weight = int(matriks[j][k]) )
-
-# def MatrixToPoint(matriks):
-#     for i in range(len(matriks)):
-#         for j in range(len(matriks[i])):
-#             matriks[i][j] = float(matriks[i][j])
-
-# def CoorToPoint(matriks):
-#     for i in range(len(matriks)):
-#         for j in range(len(matriks[0])):
-#             matriks[i][j] = float(matriks[i][j])
 
 def matrixToGraph(matrix):
     graph = {}
