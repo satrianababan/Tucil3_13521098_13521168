@@ -33,7 +33,7 @@ if __name__ == "__main__":
         try:
             goalNode = int(input("Masukkan simpul tujuan: "))
         except IndexError as e:
-            print("Simpul tujuan tidak ada pada graf")
+            print("simpul tujuan tidak ada pada graf")
             exit()
 
         print("Pilih metode yang ingin digunakan:")
@@ -50,8 +50,8 @@ if __name__ == "__main__":
         print("File tidak ditemukan pada folder test")
         exit()
     except ValueError as e:
-        print("Input graf tidak valid")
+        print("Input Graph tidak valid")
         exit()
     except IndexError as e:
-        print("Input graf tidak valid")
-        exit()
+            print("Input Graph Tidak Simetris")
+            exit()
