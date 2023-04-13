@@ -1,7 +1,6 @@
 import heapq
 from LinkedNode import *
 from Graph import *
-from Utility import *
 
 def aStar(graph:Graph, coordinate,startNode:int, goalNode:int):
 

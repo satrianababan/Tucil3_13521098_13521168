@@ -1,6 +1,7 @@
 from Node import *
 import networkx as nx
-from Utility import *
+import matplotlib.pyplot as plt
+
 class Graph:
     def __init__(self, nodes, adjMatrix):
         self.__nodes = nodes
@@ -23,6 +24,7 @@ class Graph:
                 if(adjMatrix[i][j] != 0):
                     print(" --> " + str(j), end = '')
             print()
+            
     def normalizeGraph(self):
         graph = nx.Graph()
         for i in range(len(self.getListNode())): 
@@ -53,14 +55,3 @@ class Graph:
             edge = (Path[i],Path[i+1])
             listedge.append(edge)
         nx.draw_networkx_edges(graph,pos,edgelist = listedge,edge_color="tab:red")
-        
-    def visualize(self, output_filename:str):
-        g = nx.Graph()
-        adjMatrix = self.getAdjMatrix()
-        for i in range(len(adjMatrix)):
-            for j in range(len(adjMatrix[i])):
-                if(adjMatrix[i][j] != 0):
-                    g.add_edge(i, j)
-        nx.draw(g, with_labels= True)
-        plt.savefig(output_filename)
-        plt.show()    

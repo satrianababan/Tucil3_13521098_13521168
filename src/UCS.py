@@ -1,7 +1,8 @@
 import heapq
 from LinkedNode import *
 from Graph import *
-import networkx as nx
+import matplotlib.pyplot as plt
+
 def uniformCostSearch(graph, startNode, goalNode,outputFileName):
 
     liveNodes = []
