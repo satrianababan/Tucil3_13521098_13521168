@@ -31,7 +31,7 @@ heuristik yang dipakai adalah jarak garis lurus dari suatu titik ke tujuan.
 └───Tucil3_13521098_13521168
     │ 
     ├───src
-    |   ├───Astar.py
+    |   ├───AStar.py
     |   ├───Coordinate.py
     |   ├───Graph.py
     |   ├───LinkedNode.py

@@ -12,12 +12,11 @@ if __name__ == "__main__":
         file = open("../test/" + filename)
         inputLines, adjMatrix, listCoordinate = read_file(file)
         listName = inputLines[1]
-        print(listName)
         listNode = []
         for i in range (len(listCoordinate)):
             newNode = Node(i,listCoordinate[i])
             listNode.append(newNode)
-        inputGraph = Graph(listNode, adjMatrix)
+        inputGraph = Graph(listNode, adjMatrix, listName)
         print("Visualisasi graf dengan representasi list ketetanggaan:")
         inputGraph.displayAdjList()
         graphInputName = filename.split(".")[0] + ".png"

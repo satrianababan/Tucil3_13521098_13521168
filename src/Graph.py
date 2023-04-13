@@ -4,18 +4,22 @@ import matplotlib.pyplot as plt
 from typing import Any
 
 class Graph:
-    def __init__(self, nodes, adjMatrix):
+    def __init__(self, nodes, adjMatrix, listName):
         self.__nodes = nodes
         self.__adjMatrix = adjMatrix
+        self.__listName = listName
 
     def getNode(self,index:int) -> Node:
         return self.__nodes[index]
 
-    def getAdjMatrix(self):
+    def getAdjMatrix(self) -> Any:
         return self.__adjMatrix
     
-    def getListNode(self):
+    def getListNode(self) -> Any:
         return self.__nodes
+    
+    def getListName(self) -> Any:
+        return self.__listName
     
     def displayAdjList(self):
         adjMatrix = self.getAdjMatrix()
