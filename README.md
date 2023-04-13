@@ -3,7 +3,9 @@
 
 ## Daftar Isi
 * [Deskripsi Permasalahan](#deskripsi-permasalahan)
-* [Struktur](#struktur)
+* [Struktur Repositori](#struktur-repositori)
+* [Struktur File Input](#struktur-file-input)
+* [Prasyarat Menjalankan Program](#prasyarat-menjalankan-program)
 * [Cara Menjalankan Program](#cara-menjalankan-program)
 * [Identitas Kelompok](#identitas-kelompok)
 
@@ -24,26 +26,25 @@ keduanya menggunakan algoritma UCS dan A*. Lintasan terpendek dapat ditampilkan 
 peta/graf (misalnya jalan-jalan yang menyatakan lintasan terpendek diberi warna merah). Nilai
 heuristik yang dipakai adalah jarak garis lurus dari suatu titik ke tujuan.
 
-## Struktur
+## Struktur Repositori
 ```bash
 └───Tucil3_13521098_13521168
     │ 
     ├───src
-        ├───Astar.py
-        ├───Coordinate.py
-        ├───Graph.py
-        ├───GUI.py
-        ├───LinkedNode.py
-        ├───main.py
-        ├───Node.py
-        ├───UCS.py
-        ├───Utility.py
-        │ 
-        └───test
-            ├───alunalunbandung.txt
-            ├───buahbatu.txt
-            ├───gedebage.txt
-            ├───itb.txt
+    |   ├───Astar.py
+    |   ├───Coordinate.py
+    |   ├───Graph.py
+    |   ├───LinkedNode.py
+    |   ├───main.py
+    |   ├───Node.py
+    |   ├───UCS.py
+    |   ├───Utility.py
+    │ 
+    ├───test
+        ├───alunalunbandung.txt
+        ├───buahbatu.txt
+        ├───gedebage.txt
+        ├───itb.txt
 ```
 
 ## Struktur File Input
@@ -55,13 +56,17 @@ berukuran NxN
 5. N baris selanjutnya adalah koordinat yang terdiri dari garis lintang dan garis bujur yang dipisahkan
 oleh spasi
 
+## Prasyarat Menjalankan Program
+1. Library matplotlib
+2. Library networkx
+
 ## Cara Menjalankan Program
 1. Clone repository ini menggunakan menggunakan command `git clone https://github.com/satrianababan/Tucil3_13521098_13521168.git`.
 2. Buat file input sesuai dengan struktur yang dijelaskan pada bagian sebelumnya, kemudian save file tersebut pada folder test.
-3. Jalankan program menggunakan command `python main.py`.
+3. Ubah current working direcory menjadi folder src
+4. Jalankan program menggunakan command `python main.py`.
 
 ## Identitas Kelompok
-### Nama Kelompok : pharserr
 | NIM  | Nama |
 | ------------- | ------------- |
 | 13521098 | Fazel Ginanda |
