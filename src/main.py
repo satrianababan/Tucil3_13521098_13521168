@@ -21,8 +21,8 @@ if __name__ == "__main__":
         print("Visualisasi graf dengan representasi list ketetanggaan:")
         inputGraph.displayAdjList()
         graphInputName = filename.split(".")[0] + ".png"
-        graphUCSName = filename.split(".")[0] + "PathUCS.png"
-        graphAStarName = filename.split(".")[0] + "PathAStar.png"
+        graphUCSName = filename.split(".")[0] + "UCS.png"
+        graphAStarName = filename.split(".")[0] + "AStar.png"
         inputGraph.drawInputGraph(graphInputName)
 
         try:

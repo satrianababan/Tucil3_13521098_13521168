@@ -48,5 +48,5 @@ def showPath(graph:Graph,path:Any, startNode:int, goalNode:int,outputFileName:st
             print(" --> ", end='')
     print(f" dengan panjang lintasan sebesar {sum(graph.getAdjMatrix()[path[i-1]][path[i]] for i in range(1, len(path)))}")
     graph.drawOutputGraph(path)
-    plt.savefig("../test/"+outputFileName)
+    plt.savefig("../test/output" + outputFileName)
     plt.show()

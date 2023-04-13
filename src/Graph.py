@@ -47,7 +47,7 @@ class Graph:
         nx.draw(graph,pos,with_labels=True, font_weight='bold')
         labels = nx.get_edge_attributes(graph, 'weight')
         nx.draw_networkx_edge_labels(graph, pos, edge_labels=labels)
-        plt.savefig("../test/"+outputName)
+        plt.savefig("../test/output/" + outputName)
         plt.show()
  
     def drawOutputGraph(self,Path:Any):
