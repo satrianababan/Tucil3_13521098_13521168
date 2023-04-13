@@ -4,7 +4,6 @@ from LinkedNode import *
 from Graph import *
 from Utility import *
 from Node import *
-import copy
 
 def aStar(graph:Graph, coordinate,startNode:int, goalNode:int):
 
@@ -22,14 +21,12 @@ def aStar(graph:Graph, coordinate,startNode:int, goalNode:int):
                 path.append(expandNode.index)
                 expandNode = expandNode.parent
             path.reverse()
-            return displayPath(graph,startNode,goalNode,path, coordinate)
+            return displayPath(graph,startNode,goalNode,path)
         
         visitedNodes.add(expandNode.index)
 
         for i in range(len(graph.getAdjMatrix())):
             if graph.getAdjMatrix()[expandNode.index][i] != 0 and i not in visitedNodes:
-                # node1 = Node(graph.getNode(i),coordinate[i])
-                # node2 = Node(graph.getNode(goalNode),coordinate[goalNode])
                 radius = 6371
                 lat1 = radians(coordinate[i][0])
                 lat2 = radians(coordinate[goalNode][0])
@@ -42,8 +39,15 @@ def aStar(graph:Graph, coordinate,startNode:int, goalNode:int):
                 heapq.heappush(liveNodes, LinkedNode(i, expandNode, new_path_cost))
     return displayPathNotFound()
 
-def displayPath(graph,startNode,goalNode,path,listCoordinate):
-    print(f"Lintasan terpendek dari simpul {startNode} ke {goalNode} adalah {path} dengan panjang lintasan sebesar {sum(graph.getAdjMatrix()[path[i-1]][path[i]] for i in range(1, len(path)))}.")
+def displayPath(graph,startNode,goalNode,path):
+    print(f"Lintasan terpendek dari simpul {startNode} ke {goalNode} adalah ",end='')
+    i = 0
+    while(i < len(path)):
+        print(path[i],end='')
+        i = i + 1
+        if (i < len(path)):
+            print(" --> ", end='')
+    print(f" dengan panjang lintasan sebesar {sum(graph.getAdjMatrix()[path[i-1]][path[i]] for i in range(1, len(path)))}")
 
 def displayPathNotFound():
     print("Tidak ada lintasan dari simpul asal ke simpul tujuan")

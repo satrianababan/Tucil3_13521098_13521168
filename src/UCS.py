@@ -2,7 +2,7 @@ import heapq
 from LinkedNode import *
 from Graph import *
 
-def uniformCostSearch(graph, listCoordinate, startNode, goalNode):
+def uniformCostSearch(graph, startNode, goalNode):
 
     liveNodes = []
     heapq.heappush(liveNodes, LinkedNode(startNode))
@@ -18,7 +18,7 @@ def uniformCostSearch(graph, listCoordinate, startNode, goalNode):
                 path.append(expandNode.index)
                 expandNode = expandNode.parent
             path.reverse()
-            return displayPath(graph,startNode,goalNode,path, listCoordinate)
+            return displayPath(graph,startNode,goalNode,path)
 
         visitedNodes.add(expandNode.index)
 
@@ -28,8 +28,15 @@ def uniformCostSearch(graph, listCoordinate, startNode, goalNode):
                 heapq.heappush(liveNodes, LinkedNode(i, expandNode, new_path_cost))
     return displayPathNotFound()
 
-def displayPath(graph,startNode,goalNode,path,listCoordinate):
-    print(f"Lintasan terpendek dari simpul {startNode} ke simpul {goalNode} adalah {path} dengan panjang lintasan sebesar {sum(graph.getAdjMatrix()[path[i-1]][path[i]] for i in range(1, len(path)))}.")
+def displayPath(graph,startNode,goalNode,path):
+    print(f"Lintasan terpendek dari simpul {startNode} ke {goalNode} adalah ",end='')
+    i = 0
+    while(i < len(path)):
+        print(path[i],end='')
+        i = i + 1
+        if (i < len(path)):
+            print(" --> ", end='')
+    print(f" dengan panjang lintasan sebesar {sum(graph.getAdjMatrix()[path[i-1]][path[i]] for i in range(1, len(path)))}")
 
 def displayPathNotFound():
     print("Tidak ada lintasan dari simpul asal ke simpul tujuan")
