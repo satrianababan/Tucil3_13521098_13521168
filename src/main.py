@@ -21,7 +21,10 @@ if __name__ == "__main__":
         inputGraph = Graph(listNode, adjMatrix)
         print("Visualisasi graf dengan representasi list ketetanggaan:")
         inputGraph.displayAdjList()
-        inputGraph.visualize(filename)
+        GraphVisualize = filename.split(".")[0] + "png"
+        UCSVisualize = filename.split(".")[0] + "UCS.png"
+        AstarVisualize = filename.split(".")[0] + "Astar.png"
+        inputGraph.visualize(GraphVisualize)
 
         startNode = int(input("Masukkan simpul asal: "))
         goalNode = int(input("Masukkan simpul tujuan: "))
@@ -31,7 +34,7 @@ if __name__ == "__main__":
         print("2. A*")
         method = int(input("Masukkan pilihan metode (1 atau 2): "))
         if method == 1:
-            uniformCostSearch(inputGraph, startNode, goalNode,filename)
+            uniformCostSearch(inputGraph, startNode, goalNode, UCSVisualize)
             
         elif method == 2:
             aStar(inputGraph,listCoordinate, startNode,goalNode)

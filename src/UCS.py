@@ -43,12 +43,14 @@ def displayPathNotFound():
     print("Tidak ada lintasan dari simpul asal ke simpul tujuan")
 
 def showPath(graph,path,outputFilename):
-    G = nx.erdos_renyi_graph(20,0.1)
+    adjMatrix = graph.getAdjMatrix()
+    G = nx.erdos_renyi_graph(len(adjMatrix),0.1)
     listNode = graph.getListNode()
     listNodeColor = []
-    for i in range(len(listNode)):
-        listNodeColor.append('blue')
     for nodePath in path:
         listNodeColor[nodePath] = 'red'
+    for i in range(len(listNode)):
+        if i not in path:
+            listNodeColor[i] = 'blue'
     nx.draw(G, node_color=listNodeColor, with_labels=True)
     plt.savefig(outputFilename) 

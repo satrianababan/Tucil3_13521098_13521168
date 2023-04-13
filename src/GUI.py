@@ -53,8 +53,8 @@ def search():
         input_check.config(text='Belum ada file')
     else:
         input_check.config(text=tail)
-        nama,matriks,koor = read_file(filedirect)
-        if(aStar.checkMatrix(matriks)):
+        nama,matriks,koor = read_file_GUI(filedirect)
+        if(checkMatrix(matriks)):
             graf = visualize_graph(nama,matriks,koor)
             global matrixGobal
             global matrix
@@ -65,7 +65,7 @@ def search():
             #-------visualisasi-----------
             f = plt.figure(figsize=(6.5, 4.45), dpi=100)
             ax = f.add_subplot(111)
-            aStar().draw_graph_koor(graf)
+            drawGraphCoor(graf)
             canvas = FigureCanvasTkAgg(f, master=window)
             canvas.draw()
             canvas.get_tk_widget().grid(row=1, column=2,rowspan=10)
@@ -83,8 +83,8 @@ def search():
 def astar_search():
     if(filedirect!=''):
         if(matrix[0]!="empty" and matrixGobal!=[] and globalCoor!=[]):
-            graph = aStar().matrixToGraph(matrixGobal)
-            hasil = astar.astar(graph,astar.getIDXName(matrix,click.get()),astar.getIDXName(matrix,click2.get()),globalCoor)
+            graph = matrixToGraph(matrixGobal)
+            hasil = astar(graph,astar.getIDXName(matrix,click.get()),astar.getIDXName(matrix,click2.get()),globalCoor)
             if(hasil!=None):
                 rute = astar.printRute(hasil,matrix)
                 jrk = astar.distance(graph,hasil)

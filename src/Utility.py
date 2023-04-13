@@ -117,4 +117,54 @@ def drawGraphCoor(graph):
     nx.draw(graph,pos,with_labels=True, font_weight='bold')
     labels = nx.get_edge_attributes(graph, 'weight')
     nx.draw_networkx_edge_labels(graph, pos, edge_labels=labels)
-    
+def printRute(list,nama):
+    if(list!=None):
+        ngeprin = "Rute : "
+        for i in range(len(list)):
+            if(i==len(list)-1):
+                ngeprin+=nama[list[i]]
+            else:
+                ngeprin += nama[list[i]]+"->"
+    return ngeprin
+def visualgrafkoor(nama,matriks,koor):
+    graph = nx.Graph()
+    for i in range(len(nama)):
+        graph.add_node(nama[i],pos=(koor[i][0],koor[i][1]))
+    for j in range(len(nama)):
+        for k in range(len(nama)):
+            if(matriks[j][k]!=0):
+                graph.add_edge(nama[j],nama[k],weight = int(matriks[j][k]) )
+    return graph
+def draw_graph_koor_color(graph,hasil,nama):
+    pos=nx.get_node_attributes(graph,'pos')
+    nx.draw(graph,pos,with_labels=True, font_weight='bold')
+    labels = nx.get_edge_attributes(graph, 'weight')
+    nx.draw_networkx_edge_labels(graph, pos, edge_labels=labels)
+    listedge = []
+    for i in range(len(hasil)-1):
+        edge = (nama[hasil[i]],nama[hasil[i+1]])
+        listedge.append(edge)
+    nx.draw_networkx_edges(graph,pos,edgelist = listedge,edge_color="tab:blue")
+def read_file_GUI(filename):
+    with open(filename) as f:
+        nama = f.readline().strip().split()
+        banyak = len(nama)
+        matriks = []
+        koordinat = []
+        for i in range(banyak):
+            line = f.readline().strip().split()
+            matriks.append(line)
+        for j in range(banyak):
+            koor = f.readline().strip().split()
+            koordinat.append(koor)
+        matstringtoint(matriks)
+        koorstrtoint(koordinat)
+        return nama,matriks,koordinat
+def matstringtoint(matriks):
+    for i in range(len(matriks)):
+        for j in range(len(matriks[0])):
+            matriks[i][j] = float(matriks[i][j])
+def koorstrtoint(matriks):
+    for i in range(len(matriks)):
+        for j in range(len(matriks[0])):
+            matriks[i][j] = float(matriks[i][j])
