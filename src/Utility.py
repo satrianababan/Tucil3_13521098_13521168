@@ -13,3 +13,22 @@ def read_file(filename):
         matriksToFloat[i] = [float(x) for x in matriks[i].split()]
         CoorToFloat[i] = [float(x) for x in koordinat[i].split()]
     return file,matriksToFloat,CoorToFloat
+
+def isSquareMatrix(matrix:list[list[float]]) -> bool:
+    square = True
+    rowCount = len(matrix)
+    columnCount = len(matrix[0])
+    if(rowCount != columnCount):
+        square = False
+    else:
+        i = 0
+        while(i < len(matrix) and square):
+            if (len(matrix[i]) != columnCount):
+                square = False
+    return square
+
+def isNumberEqualsMatrix(number:int,matrix:list[list[int]]) -> bool:
+    if(number == len(matrix)):
+        return True
+    else:
+        return False
