@@ -1,24 +1,23 @@
 import heapq
-from Node import *
 from LinkedNode import *
 from Graph import *
-from Utility import *
-from Node import *
 
-def aStar(graph:Graph, coordinate,startNode:int, goalNode:int):
+def aStar(graph:Graph, coordinate,startNode:int, goalNode:int,outputFileName:str):
     liveNodes = []
     heapq.heappush(liveNodes, LinkedNode(startNode))
+
     visitedNodes = set()
 
     while liveNodes:
         expandNode = heapq.heappop(liveNodes)
+
         if expandNode.index == goalNode:
             path = []
             while expandNode:
                 path.append(expandNode.index)
                 expandNode = expandNode.parent
             path.reverse()
-            return ShowPath(graph, path, startNode, goalNode)
+            return showPath(graph, path, startNode, goalNode,outputFileName)
         
         visitedNodes.add(expandNode.index)
 
@@ -36,21 +35,11 @@ def aStar(graph:Graph, coordinate,startNode:int, goalNode:int):
                 heapq.heappush(liveNodes, LinkedNode(i, expandNode, new_path_cost))
     return displayPathNotFound()
 
-def displayPath(graph,startNode,goalNode,path):
-    print(f"Lintasan terpendek dari simpul {startNode} ke {goalNode} adalah ",end='')
-    i = 0
-    while(i < len(path)):
-        print(path[i],end='')
-        i = i + 1
-        if (i < len(path)):
-            print(" --> ", end='')
-    print(f" dengan panjang lintasan sebesar {sum(graph.getAdjMatrix()[path[i-1]][path[i]] for i in range(1, len(path)))}")
-
 def displayPathNotFound():
     print("Tidak ada lintasan dari simpul asal ke simpul tujuan")
     
-def ShowPath(graph:Graph,path, startNode, goalNode):
-    print(f"Lintasan terpendek dari simpul {startNode} ke {goalNode} adalah ",end='')
+def showPath(graph:Graph,path:Any, startNode:int, goalNode:int,outputFileName:str):
+    print(f"Lintasan terpendek dari simpul {graph.getListName()[startNode]} ke {graph.getListName()[goalNode]} adalah ",end='')
     i = 0
     while(i < len(path)):
         print(path[i],end='')
@@ -58,5 +47,6 @@ def ShowPath(graph:Graph,path, startNode, goalNode):
         if (i < len(path)):
             print(" --> ", end='')
     print(f" dengan panjang lintasan sebesar {sum(graph.getAdjMatrix()[path[i-1]][path[i]] for i in range(1, len(path)))}")
-    graph.drawGraphColor(path)
+    graph.drawOutputGraph(path)
+    plt.savefig(outputFileName)
     plt.show()

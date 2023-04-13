@@ -1,10 +1,7 @@
-import networkx as nx
-from pyvis.network import Network
-import matplotlib.pyplot as plt
+from Node import *
 from Graph import *
 from UCS import *
 from AStar import *
-from Node import *
 from Utility import *
 
 if __name__ == "__main__":
@@ -13,18 +10,19 @@ if __name__ == "__main__":
     filename = input("Masukkan nama file: ")
     try:
         file = open("../test/" + filename)
-        place, adjMatrix, listCoordinate = read_file(file)
+        inputLines, adjMatrix, listCoordinate = read_file(file)
+        listName = inputLines[1]
         listNode = []
         for i in range (len(listCoordinate)):
             newNode = Node(i,listCoordinate[i])
             listNode.append(newNode)
-        inputGraph = Graph(listNode, adjMatrix)
+        inputGraph = Graph(listNode, adjMatrix, listName)
         print("Visualisasi graf dengan representasi list ketetanggaan:")
         inputGraph.displayAdjList()
-        GraphVisualize = filename.split(".")[0] + "png"
-        UCSVisualize = filename.split(".")[0] + "-UCS.png"
-        AstarVisualize = filename.split(".")[0] + "-A*.png"
-        inputGraph.drawGraph()
+        graphInputName = filename.split(".")[0] + ".png"
+        graphUCSName = filename.split(".")[0] + "PathUCS.png"
+        graphAStarName = filename.split(".")[0] + "PathAStar.png"
+        inputGraph.drawInputGraph(graphInputName)
 
         startNode = int(input("Masukkan simpul asal: "))
         goalNode = int(input("Masukkan simpul tujuan: "))
@@ -34,11 +32,9 @@ if __name__ == "__main__":
         print("2. A*")
         method = int(input("Masukkan pilihan metode (1 atau 2): "))
         if method == 1:
-            uniformCostSearch(inputGraph, startNode, goalNode, UCSVisualize, listCoordinate)
-            
+            uniformCostSearch(inputGraph, startNode, goalNode, graphUCSName)
         elif method == 2:
-            aStar(inputGraph,listCoordinate, startNode,goalNode)
-
+            aStar(inputGraph,listCoordinate, startNode,goalNode, graphAStarName)
         else:
             print("Pilihan salah")
     except FileNotFoundError as e:
