@@ -8,15 +8,3 @@ class Coordinate:
     
     def __eq__(self, other):
         return ((self.getLatitude() == other.getLatitude()) and (self.getLongitude() == other.getLongitude()))
-
-# # Test
-# p1 = Coordinate()
-# print(p1.getLatitude())
-# print(p1.getLongitude())
-# p1.setLatitude(1.654789)
-# p1.setLongitude(1.076)
-# print(p1)
-# p2 = Coordinate(1.654789,1.076)
-# print(p2)
-# if (p1 == p2):
-#     print("p1 sama dengan p2")

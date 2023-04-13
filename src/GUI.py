@@ -10,7 +10,6 @@ from matplotlib.backends.backend_tkagg import (
     NavigationToolbar2Tk
 )
 from Utility import *
-from Path import *
 from UCS import *
 from AStar import *
 
@@ -54,9 +53,9 @@ def search():
         input_check.config(text='Belum ada file')
     else:
         input_check.config(text=tail)
-        nama,matriks,koor = aStar.read_file(filedirect)
+        nama,matriks,koor = read_file(filedirect)
         if(aStar.checkMatrix(matriks)):
-            graf = Path.aStar.visualize_graph(nama,matriks,koor)
+            graf = visualize_graph(nama,matriks,koor)
             global matrixGobal
             global matrix
             global globalCoor
@@ -66,7 +65,7 @@ def search():
             #-------visualisasi-----------
             f = plt.figure(figsize=(6.5, 4.45), dpi=100)
             ax = f.add_subplot(111)
-            Path.aStar.draw_graph_koor(graf)
+            aStar().draw_graph_koor(graf)
             canvas = FigureCanvasTkAgg(f, master=window)
             canvas.draw()
             canvas.get_tk_widget().grid(row=1, column=2,rowspan=10)
@@ -84,7 +83,7 @@ def search():
 def astar_search():
     if(filedirect!=''):
         if(matrix[0]!="empty" and matrixGobal!=[] and globalCoor!=[]):
-            graph = Path.aStar.matrixToGraph(matrixGobal)
+            graph = aStar().matrixToGraph(matrixGobal)
             hasil = astar.astar(graph,astar.getIDXName(matrix,click.get()),astar.getIDXName(matrix,click2.get()),globalCoor)
             if(hasil!=None):
                 rute = astar.printRute(hasil,matrix)
@@ -108,10 +107,10 @@ def ucs_search():
         graph = uniformCostSearch.read_graph(filedirect)
         a = click.get()
         b = click2.get()
-        if(len(Path.uniformCostSearch.ucs()) > 2):
+        if(len(uniformCostSearch.ucs()) > 2):
             hasil = "No path found"
         else:
-            hasil, jarak = Path.uniformCostSearch.ucs()
+            hasil, jarak = uniformCostSearch.ucs()
         if(hasil=="No path found"):
             result.config(text="Tidak menemukan rute")
             distance.config(text="")
