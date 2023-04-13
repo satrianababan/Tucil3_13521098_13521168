@@ -4,10 +4,9 @@ import matplotlib.pyplot as plt
 from typing import Any
 
 class Graph:
-    def __init__(self, nodes, adjMatrix, listName):
+    def __init__(self, nodes, adjMatrix):
         self.__nodes = nodes
         self.__adjMatrix = adjMatrix
-        self.__listName = listName
 
     def getNode(self,index:int) -> Node:
         return self.__nodes[index]
@@ -17,9 +16,6 @@ class Graph:
     
     def getListNode(self) -> Any:
         return self.__nodes
-    
-    def getListName(self) -> Any:
-        return self.__listName
     
     def displayAdjList(self):
         adjMatrix = self.getAdjMatrix()
@@ -46,7 +42,7 @@ class Graph:
         nx.draw(graph,pos,with_labels=True, font_weight='bold')
         labels = nx.get_edge_attributes(graph, 'weight')
         nx.draw_networkx_edge_labels(graph, pos, edge_labels=labels)
-        plt.savefig(outputName)
+        plt.savefig("../test/"+outputName)
         plt.show()
  
     def drawOutputGraph(self,Path:Any):

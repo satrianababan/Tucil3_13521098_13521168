@@ -30,7 +30,7 @@ def displayPathNotFound():
     print("Tidak ada lintasan dari simpul asal ke simpul tujuan")
 
 def showPath(graph:Graph,path:Any, startNode:int, goalNode:int, outputFileName:str):
-    print(f"Lintasan terpendek dari simpul {graph.getListName()[startNode]} ke {graph.getListName()[goalNode]} adalah ",end='')
+    print(f"Lintasan terpendek dari simpul {startNode} ke {goalNode} adalah ",end='')
     i = 0
     while(i < len(path)):
         print(path[i],end='')
@@ -39,5 +39,5 @@ def showPath(graph:Graph,path:Any, startNode:int, goalNode:int, outputFileName:s
             print(" --> ", end='')
     print(f" dengan panjang lintasan sebesar {sum(graph.getAdjMatrix()[path[i-1]][path[i]] for i in range(1, len(path)))}")
     graph.drawOutputGraph(path)
-    plt.savefig(outputFileName)
+    plt.savefig("../test/"+outputFileName)
     plt.show()

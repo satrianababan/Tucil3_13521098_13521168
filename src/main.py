@@ -5,18 +5,19 @@ from AStar import *
 from Utility import *
 
 if __name__ == "__main__":
+    print("===================================")
     print("PROGRAM PENCARIAN LINTASAN TERDEKAT")
+    print("===================================")
     print()
     filename = input("Masukkan nama file: ")
     try:
         file = open("../test/" + filename)
-        inputLines, adjMatrix, listCoordinate = read_file(file)
-        listName = inputLines[1]
+        listName, adjMatrix, listCoordinate = read_file(file)
         listNode = []
         for i in range (len(listCoordinate)):
             newNode = Node(i,listCoordinate[i])
             listNode.append(newNode)
-        inputGraph = Graph(listNode, adjMatrix, listName)
+        inputGraph = Graph(listNode, adjMatrix)
         print("Visualisasi graf dengan representasi list ketetanggaan:")
         inputGraph.displayAdjList()
         graphInputName = filename.split(".")[0] + ".png"
@@ -24,8 +25,16 @@ if __name__ == "__main__":
         graphAStarName = filename.split(".")[0] + "PathAStar.png"
         inputGraph.drawInputGraph(graphInputName)
 
-        startNode = int(input("Masukkan simpul asal: "))
-        goalNode = int(input("Masukkan simpul tujuan: "))
+        try:
+            startNode = int(input("Masukkan simpul asal: "))
+        except IndexError as e:
+            print("Simpul asal tidak ada pada graf")
+            exit()
+        try:
+            goalNode = int(input("Masukkan simpul tujuan: "))
+        except IndexError as e:
+            print("simpul tujuan tidak ada pada graf")
+            exit()
 
         print("Pilih metode yang ingin digunakan:")
         print("1. UCS")
@@ -39,4 +48,7 @@ if __name__ == "__main__":
             print("Pilihan salah")
     except FileNotFoundError as e:
         print("File tidak ditemukan pada folder test")
+        exit()
+    except ValueError as e:
+        print("Input Graph tidak valid")
         exit()
