@@ -36,7 +36,6 @@ heuristik yang dipakai adalah jarak garis lurus dari suatu titik ke tujuan.
         ├───LinkedNode.py
         ├───main.py
         ├───Node.py
-        ├───Path.py
         ├───UCS.py
         ├───Utility.py
         │ 
