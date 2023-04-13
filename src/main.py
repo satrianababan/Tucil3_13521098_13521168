@@ -1,3 +1,6 @@
+import networkx as nx
+from pyvis.network import Network
+import matplotlib.pyplot as plt
 from Graph import *
 from UCS import *
 from AStar import *
@@ -28,8 +31,10 @@ if __name__ == "__main__":
         method = int(input("Masukkan pilihan metode (1 atau 2): "))
         if method == 1:
             uniformCostSearch(inputGraph, startNode, goalNode)
+            Graph.visualize("graph.html")
         elif method == 2:
             aStar(inputGraph,listCoordinate, startNode,goalNode)
+            Graph.visualize("graph.html")
         else:
             print("Pilihan salah")
     except FileNotFoundError as e:

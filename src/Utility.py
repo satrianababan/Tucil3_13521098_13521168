@@ -1,4 +1,5 @@
 import networkx as nx
+from pyvis.network import Network
 import matplotlib.pyplot as plt
 from Node import *
 from Coordinate import *
@@ -116,3 +117,4 @@ def drawGraphCoor(graph):
     nx.draw(graph,pos,with_labels=True, font_weight='bold')
     labels = nx.get_edge_attributes(graph, 'weight')
     nx.draw_networkx_edge_labels(graph, pos, edge_labels=labels)
+    
