@@ -47,6 +47,15 @@ heuristik yang dipakai adalah jarak garis lurus dari suatu titik ke tujuan.
             ├───itb.txt
 ```
 
+## Struktur File Input
+1. File input disimpan dalam format txt
+2. Baris pertama adalah banyak simpul
+3. Baris kedua adalah nama setiap simpul yang dipisahkan oleh spasi
+4. Jika banyak simpul adalah N, maka N baris selanjutnya adalah matriks ketetanggaan berbobot yang
+berukuran NxN
+5. N baris selanjutnya adalah koordinat yang terdiri dari garis lintang dan garis bujur yang dipisahkan
+oleh spasi
+
 ## Cara Menjalankan Program
 1. Clone repository ini menggunakan menggunakan command `git clone https://github.com/satrianababan/Tucil3_13521098_13521168.git`.
 2. Buat file input sesuai dengan struktur yang dijelaskan pada bagian sebelumnya, kemudian save file tersebut pada folder test.
