@@ -24,7 +24,7 @@ if __name__ == "__main__":
         GraphVisualize = filename.split(".")[0] + "png"
         UCSVisualize = filename.split(".")[0] + "UCS.png"
         AstarVisualize = filename.split(".")[0] + "Astar.png"
-        inputGraph.visualize(GraphVisualize)
+        inputGraph.drawGraph()
 
         startNode = int(input("Masukkan simpul asal: "))
         goalNode = int(input("Masukkan simpul tujuan: "))
@@ -34,10 +34,10 @@ if __name__ == "__main__":
         print("2. A*")
         method = int(input("Masukkan pilihan metode (1 atau 2): "))
         if method == 1:
-            uniformCostSearch(inputGraph, startNode, goalNode, UCSVisualize)
+            uniformCostSearch(inputGraph, startNode, goalNode, UCSVisualize, listCoordinate)
             
         elif method == 2:
-            aStar(inputGraph,listCoordinate, startNode,goalNode)
+            aStar(inputGraph,listCoordinate, startNode,goalNode, AstarVisualize)
 
         else:
             print("Pilihan salah")

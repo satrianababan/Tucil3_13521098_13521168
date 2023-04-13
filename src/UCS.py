@@ -2,12 +2,10 @@ import heapq
 from LinkedNode import *
 from Graph import *
 import networkx as nx
-def uniformCostSearch(graph, startNode, goalNode,outputFileName):
+def uniformCostSearch(graph, startNode, goalNode,outputFileName, listCoordinate):
 
     liveNodes = []
     heapq.heappush(liveNodes, LinkedNode(startNode))
-
-
     visitedNodes = set()
 
     while liveNodes:
@@ -19,7 +17,7 @@ def uniformCostSearch(graph, startNode, goalNode,outputFileName):
                 expandNode = expandNode.parent
             path.reverse()
             # return displayPath(graph,startNode,goalNode,path)
-            return showPath(graph,path,outputFileName)
+            return ShowPath(graph, path, startNode, goalNode)
 
         visitedNodes.add(expandNode.index)
 
@@ -42,15 +40,44 @@ def displayPath(graph:Graph,startNode:int,goalNode:int,path):
 def displayPathNotFound():
     print("Tidak ada lintasan dari simpul asal ke simpul tujuan")
 
-def showPath(graph,path,outputFilename):
-    adjMatrix = graph.getAdjMatrix()
-    G = nx.erdos_renyi_graph(len(adjMatrix),0.1)
-    listNode = graph.getListNode()
-    listNodeColor = []
-    for nodePath in path:
-        listNodeColor[nodePath] = 'red'
-    for i in range(len(listNode)):
-        if i not in path:
-            listNodeColor[i] = 'blue'
-    nx.draw(G, node_color=listNodeColor, with_labels=True)
-    plt.savefig(outputFilename) 
+# def showPath(graph,startNode, goalNode, path,outputFilename, listCoordinate):
+#     print(f"Lintasan terpendek dari simpul {startNode} ke {goalNode} adalah ",end='')
+#     i = 0
+#     while(i < len(path)):
+#         print(path[i],end='')
+#         i = i + 1
+#         if (i < len(path)):
+#             print(" --> ", end='')
+#     print(f" dengan panjang lintasan sebesar {sum(graph.getAdjMatrix()[path[i-1]][path[i]] for i in range(1, len(path)))}")
+#     adjMatrix = graph.getAdjMatrix()
+#     G = nx.Graph()
+#     listNode = graph.getListNode()
+#     listNodeColor = []
+#     listNodeName = []
+#     for i in range(len(listNode)):
+#         listNodeName.append(i)
+#     for i in range(len(adjMatrix)):
+#             for j in range(len(adjMatrix[i])):
+#                 if(adjMatrix[i][j] != 0):
+#                     G.add_edge(i, j)
+#     for i in range(len(listNode)):
+#         if i not in path:
+#             listNodeColor.append('blue')
+#         else:
+#             listNodeColor.append('red')
+#         print(listNodeColor)
+#     nx.draw(G,nodeList=listNodeName, node_color=listNodeColor, with_labels=True)
+#     # plt.savefig(outputFilename)
+#     plt.show()
+
+def ShowPath(graph:Graph,path, startNode, goalNode):
+    print(f"Lintasan terpendek dari simpul {startNode} ke {goalNode} adalah ",end='')
+    i = 0
+    while(i < len(path)):
+        print(path[i],end='')
+        i = i + 1
+        if (i < len(path)):
+            print(" --> ", end='')
+    print(f" dengan panjang lintasan sebesar {sum(graph.getAdjMatrix()[path[i-1]][path[i]] for i in range(1, len(path)))}")
+    graph.drawGraphColor(path)
+    plt.show()

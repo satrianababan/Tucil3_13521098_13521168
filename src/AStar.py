@@ -21,7 +21,7 @@ def aStar(graph:Graph, coordinate,startNode:int, goalNode:int):
                 path.append(expandNode.index)
                 expandNode = expandNode.parent
             path.reverse()
-            return displayPath(graph,startNode,goalNode,path)
+            return ShowPath(graph, path, startNode, goalNode)
         
         visitedNodes.add(expandNode.index)
 
@@ -51,3 +51,15 @@ def displayPath(graph,startNode,goalNode,path):
 
 def displayPathNotFound():
     print("Tidak ada lintasan dari simpul asal ke simpul tujuan")
+    
+def ShowPath(graph:Graph,path, startNode, goalNode):
+    print(f"Lintasan terpendek dari simpul {startNode} ke {goalNode} adalah ",end='')
+    i = 0
+    while(i < len(path)):
+        print(path[i],end='')
+        i = i + 1
+        if (i < len(path)):
+            print(" --> ", end='')
+    print(f" dengan panjang lintasan sebesar {sum(graph.getAdjMatrix()[path[i-1]][path[i]] for i in range(1, len(path)))}")
+    graph.drawGraphColor(path)
+    plt.show()
