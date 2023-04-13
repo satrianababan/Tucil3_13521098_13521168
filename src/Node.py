@@ -31,13 +31,3 @@ class Node:
 
     def __eq__(self, other):
         return ((self.getName() == other.getName()) and (self.getCoordinate() == other.getCoordinate()))
-
-# # Test
-# p1 = Coordinate(1.3087,2.9104)
-# self = Node(1,p1)
-# p2 = Coordinate(1.3087,2.9104)
-# node2 = Node(1,p2)
-# print(self)
-# print(node2)
-# if (self == node2):
-#     print("node 1 sama dengan node 2")
