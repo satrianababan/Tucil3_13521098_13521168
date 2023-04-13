@@ -3,7 +3,7 @@ from LinkedNode import *
 from Graph import *
 import matplotlib.pyplot as plt
 
-def uniformCostSearch(graph, startNode, goalNode,outputFileName):
+def uniformCostSearch(graph:Graph, startNode:int, goalNode:int,outputFileName:str):
     liveNodes = []
     heapq.heappush(liveNodes, LinkedNode(startNode))
     visitedNodes = set()
@@ -29,7 +29,7 @@ def uniformCostSearch(graph, startNode, goalNode,outputFileName):
 def displayPathNotFound():
     print("Tidak ada lintasan dari simpul asal ke simpul tujuan")
 
-def showPath(graph:Graph,path, startNode, goalNode, outputName):
+def showPath(graph:Graph,path:Any, startNode:int, goalNode:int, outputFileName:str):
     print(f"Lintasan terpendek dari simpul {startNode} ke {goalNode} adalah ",end='')
     i = 0
     while(i < len(path)):
@@ -39,5 +39,5 @@ def showPath(graph:Graph,path, startNode, goalNode, outputName):
             print(" --> ", end='')
     print(f" dengan panjang lintasan sebesar {sum(graph.getAdjMatrix()[path[i-1]][path[i]] for i in range(1, len(path)))}")
     graph.drawOutputGraph(path)
-    plt.savefig(outputName)
+    plt.savefig(outputFileName)
     plt.show()

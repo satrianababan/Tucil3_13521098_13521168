@@ -1,6 +1,7 @@
 from Node import *
 import networkx as nx
 import matplotlib.pyplot as plt
+from typing import Any
 
 class Graph:
     def __init__(self, nodes, adjMatrix):
@@ -44,7 +45,7 @@ class Graph:
         plt.savefig(outputName)
         plt.show()
  
-    def drawOutputGraph(self,Path:list(int)):
+    def drawOutputGraph(self,Path:Any):
         graph = self.normalizeGraph()
         pos=nx.get_node_attributes(graph,'pos')
         nx.draw(graph,pos,with_labels=True, font_weight='bold')

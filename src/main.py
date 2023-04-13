@@ -10,7 +10,9 @@ if __name__ == "__main__":
     filename = input("Masukkan nama file: ")
     try:
         file = open("../test/" + filename)
-        place, adjMatrix, listCoordinate = read_file(file)
+        inputLines, adjMatrix, listCoordinate = read_file(file)
+        listName = inputLines[1]
+        print(listName)
         listNode = []
         for i in range (len(listCoordinate)):
             newNode = Node(i,listCoordinate[i])
@@ -18,10 +20,10 @@ if __name__ == "__main__":
         inputGraph = Graph(listNode, adjMatrix)
         print("Visualisasi graf dengan representasi list ketetanggaan:")
         inputGraph.displayAdjList()
-        graphOutputName = filename.split(".")[0] + ".png"
-        UCSOutputName = filename.split(".")[0] + "PathUCS.png"
-        aStarOutputName = filename.split(".")[0] + "PathAstar.png"
-        inputGraph.drawGraph(graphOutputName)
+        graphInputName = filename.split(".")[0] + ".png"
+        graphUCSName = filename.split(".")[0] + "PathUCS.png"
+        graphAStarName = filename.split(".")[0] + "PathAStar.png"
+        inputGraph.drawInputGraph(graphInputName)
 
         startNode = int(input("Masukkan simpul asal: "))
         goalNode = int(input("Masukkan simpul tujuan: "))
@@ -31,10 +33,9 @@ if __name__ == "__main__":
         print("2. A*")
         method = int(input("Masukkan pilihan metode (1 atau 2): "))
         if method == 1:
-            uniformCostSearch(inputGraph, startNode, goalNode, UCSOutputName)
-            
+            uniformCostSearch(inputGraph, startNode, goalNode, graphUCSName)
         elif method == 2:
-            aStar(inputGraph,listCoordinate, startNode,goalNode, aStarOutputName)
+            aStar(inputGraph,listCoordinate, startNode,goalNode, graphAStarName)
         else:
             print("Pilihan salah")
     except FileNotFoundError as e:

@@ -2,7 +2,7 @@ import heapq
 from LinkedNode import *
 from Graph import *
 
-def aStar(graph:Graph, coordinate,startNode:int, goalNode:int):
+def aStar(graph:Graph, coordinate,startNode:int, goalNode:int,outputFileName:str):
     liveNodes = []
     heapq.heappush(liveNodes, LinkedNode(startNode))
 
@@ -17,7 +17,7 @@ def aStar(graph:Graph, coordinate,startNode:int, goalNode:int):
                 path.append(expandNode.index)
                 expandNode = expandNode.parent
             path.reverse()
-            return showPath(graph, path, startNode, goalNode)
+            return showPath(graph, path, startNode, goalNode,outputFileName)
         
         visitedNodes.add(expandNode.index)
 
@@ -38,7 +38,7 @@ def aStar(graph:Graph, coordinate,startNode:int, goalNode:int):
 def displayPathNotFound():
     print("Tidak ada lintasan dari simpul asal ke simpul tujuan")
     
-def showPath(graph:Graph,path:list(int), startNode:int, goalNode:int):
+def showPath(graph:Graph,path:Any, startNode:int, goalNode:int,outputFileName:str):
     print(f"Lintasan terpendek dari simpul {startNode} ke {goalNode} adalah ",end='')
     i = 0
     while(i < len(path)):
@@ -48,4 +48,5 @@ def showPath(graph:Graph,path:list(int), startNode:int, goalNode:int):
             print(" --> ", end='')
     print(f" dengan panjang lintasan sebesar {sum(graph.getAdjMatrix()[path[i-1]][path[i]] for i in range(1, len(path)))}")
     graph.drawOutputGraph(path)
+    plt.savefig(outputFileName)
     plt.show()
