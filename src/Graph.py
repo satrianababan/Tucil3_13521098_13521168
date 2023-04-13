@@ -1,6 +1,6 @@
 from Node import *
 import networkx as nx
-from pyvis.network import Network
+# from pyvis.network import Network
 from Utility import *
 class Graph:
     def __init__(self, nodes, adjMatrix):
@@ -26,15 +26,17 @@ class Graph:
             print()
             
     def visualize(self, output_filename):
-        g = Network(height="750px", width="100%", bgcolor="#222222", font_color="white")
-        lisNode = self.getListNode()
-        for i in range(len(lisNode)):
-            g.add_node(i, label=lisNode[i].getName())
+        # g = Network(height="750px", width="100%", bgcolor="#222222", font_color="white")
+        g = nx.Graph()
+        # listNode = self.getListNode()
+        # for i in range(len(lisNode)):
+            # g.add_node(i, label=lisNode[i].getName())
         # g.add_nodes(graph.nodes())
         # g.add_edges()
         adjMatrix = self.getAdjMatrix()
         for i in range(len(adjMatrix)):
             for j in range(len(adjMatrix[i])):
                 if(adjMatrix[i][j] != 0):
-                    g.add_edge(i, j, value=adjMatrix[i][j])
-        g.show(output_filename)
+                    g.add_edge(i, j)
+        nx.draw(g, with_labels= True)
+        plt.savefig("inputGraph.png")
