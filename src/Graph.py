@@ -24,7 +24,7 @@ class Graph:
                 if(adjMatrix[i][j] != 0):
                     print(" --> " + str(j), end = '')
             print()
-            
+
     def normalizeGraph(self):
         graph = nx.Graph()
         for i in range(len(self.getListNode())): 
@@ -35,7 +35,7 @@ class Graph:
                     graph.add_edge(j, k, weight = float(self.getAdjMatrix()[j][k]) )
         return graph
 
-    def drawGraph(self,outputName:str):
+    def drawInputGraph(self,outputName:str):
         graph = self.normalizeGraph()
         pos=nx.get_node_attributes(graph,'pos')
         nx.draw(graph,pos,with_labels=True, font_weight='bold')
@@ -44,7 +44,7 @@ class Graph:
         plt.savefig(outputName)
         plt.show()
  
-    def drawGraphColor(self,Path:list(int)):
+    def drawOutputGraph(self,Path:list(int)):
         graph = self.normalizeGraph()
         pos=nx.get_node_attributes(graph,'pos')
         nx.draw(graph,pos,with_labels=True, font_weight='bold')

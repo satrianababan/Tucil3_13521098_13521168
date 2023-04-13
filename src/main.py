@@ -1,7 +1,7 @@
+from Node import *
 from Graph import *
 from UCS import *
 from AStar import *
-from Node import *
 from Utility import *
 
 if __name__ == "__main__":

@@ -3,7 +3,6 @@ from LinkedNode import *
 from Graph import *
 
 def aStar(graph:Graph, coordinate,startNode:int, goalNode:int):
-
     liveNodes = []
     heapq.heappush(liveNodes, LinkedNode(startNode))
 
@@ -48,5 +47,5 @@ def showPath(graph:Graph,path:list(int), startNode:int, goalNode:int):
         if (i < len(path)):
             print(" --> ", end='')
     print(f" dengan panjang lintasan sebesar {sum(graph.getAdjMatrix()[path[i-1]][path[i]] for i in range(1, len(path)))}")
-    graph.drawGraphColor(path)
+    graph.drawOutputGraph(path)
     plt.show()

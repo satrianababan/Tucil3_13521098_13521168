@@ -4,7 +4,6 @@ from Graph import *
 import matplotlib.pyplot as plt
 
 def uniformCostSearch(graph, startNode, goalNode,outputFileName):
-
     liveNodes = []
     heapq.heappush(liveNodes, LinkedNode(startNode))
     visitedNodes = set()
@@ -17,8 +16,7 @@ def uniformCostSearch(graph, startNode, goalNode,outputFileName):
                 path.append(expandNode.index)
                 expandNode = expandNode.parent
             path.reverse()
-            # return displayPath(graph,startNode,goalNode,path)
-            return ShowPath(graph, path, startNode, goalNode, outputFileName)
+            return showPath(graph, path, startNode, goalNode, outputFileName)
 
         visitedNodes.add(expandNode.index)
 
@@ -28,20 +26,10 @@ def uniformCostSearch(graph, startNode, goalNode,outputFileName):
                 heapq.heappush(liveNodes, LinkedNode(i, expandNode, new_path_cost))
     return displayPathNotFound()
 
-def displayPath(graph:Graph,startNode:int,goalNode:int,path):
-    print(f"Lintasan terpendek dari simpul {startNode} ke {goalNode} adalah ",end='')
-    i = 0
-    while(i < len(path)):
-        print(path[i],end='')
-        i = i + 1
-        if (i < len(path)):
-            print(" --> ", end='')
-    print(f" dengan panjang lintasan sebesar {sum(graph.getAdjMatrix()[path[i-1]][path[i]] for i in range(1, len(path)))}")
-
 def displayPathNotFound():
     print("Tidak ada lintasan dari simpul asal ke simpul tujuan")
 
-def ShowPath(graph:Graph,path, startNode, goalNode, outputName):
+def showPath(graph:Graph,path, startNode, goalNode, outputName):
     print(f"Lintasan terpendek dari simpul {startNode} ke {goalNode} adalah ",end='')
     i = 0
     while(i < len(path)):
@@ -50,6 +38,6 @@ def ShowPath(graph:Graph,path, startNode, goalNode, outputName):
         if (i < len(path)):
             print(" --> ", end='')
     print(f" dengan panjang lintasan sebesar {sum(graph.getAdjMatrix()[path[i-1]][path[i]] for i in range(1, len(path)))}")
-    graph.drawGraphColor(path)
+    graph.drawOutputGraph(path)
     plt.savefig(outputName)
     plt.show()
