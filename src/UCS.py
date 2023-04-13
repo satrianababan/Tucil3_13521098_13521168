@@ -29,7 +29,7 @@ def uniformCostSearch(graph, listCoordinate, startNode, goalNode):
     return displayPathNotFound()
 
 def displayPath(graph,startNode,goalNode,path,listCoordinate):
-    print(f"Lintasan terpendek dari {listCoordinate[startNode]} ke {listCoordinate[goalNode]} adalah {path} dengan panjang lintasan sebesar {sum(graph.getAdjMatrix()[path[i-1]][path[i]] for i in range(1, len(path)))}.")
+    print(f"Lintasan terpendek dari simpul {startNode} ke simpul {goalNode} adalah {path} dengan panjang lintasan sebesar {sum(graph.getAdjMatrix()[path[i-1]][path[i]] for i in range(1, len(path)))}.")
 
 def displayPathNotFound():
     print("Tidak ada lintasan dari simpul asal ke simpul tujuan")

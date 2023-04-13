@@ -5,21 +5,20 @@ from Coordinate import *
 from math import *
 
 def read_file(filename):
-    # with open(filename) as f:
-        file = filename.read().splitlines()
-        banyak = int(file[0])
-        matriks = []
-        koordinat = []
-        matriksToFloat = [[0 for i in range(banyak)] for j in range(banyak)]
-        CoorToFloat = [[0 for i in range(2)] for j in range(banyak)]
-        for i in range(banyak):
-            line = file[i+2]
-            matriks.append(line)
-            koor = file[i+2+banyak]
-            koordinat.append(koor)
-            matriksToFloat[i] = [float(x) for x in matriks[i].split()]
-            CoorToFloat[i] = [float(x) for x in koordinat[i].split()]
-        return file,matriksToFloat,CoorToFloat
+    file = filename.read().splitlines()
+    banyak = int(file[0])
+    matriks = []
+    koordinat = []
+    matriksToFloat = [[0 for i in range(banyak)] for j in range(banyak)]
+    CoorToFloat = [[0 for i in range(2)] for j in range(banyak)]
+    for i in range(banyak):
+        line = file[i+2]
+        matriks.append(line)
+        koor = file[i+2+banyak]
+        koordinat.append(koor)
+        matriksToFloat[i] = [float(x) for x in matriks[i].split()]
+        CoorToFloat[i] = [float(x) for x in koordinat[i].split()]
+    return file,matriksToFloat,CoorToFloat
     
 # Membaca file graf
 def read_graph(filename):
@@ -59,6 +58,15 @@ def matrixToGraph(matrix):
             if (matrix[i][j] != 0):
                 addEdge(graph, (i, j), (i, j + 1), matrix[i][j])
                 addEdge(graph, (i, j), (i + 1, j), matrix[i][j])
+    return graph
+
+def matrixToGraph(matrix):
+    graph = {}
+    for i in range(len(matrix)):
+        addPoint(graph, i)
+        for j in range(len(matrix[i])):
+            if matrix[i][j] != 0:
+                addEdge(graph, i, j, matrix[i][j])
     return graph
 
 def printPath(graph, NamaKota):
@@ -102,15 +110,6 @@ def visualize_graph(nama,matriks,coor):
         for k in range(len(nama)):
             if(matriks[j][k]!=0):
                 graph.add_edge(nama[j],nama[k],weight = int(matriks[j][k]) )
-
-def matrixToGraph(matrix):
-    graph = {}
-    for i in range(len(matrix)):
-        addPoint(graph, i)
-        for j in range(len(matrix[i])):
-            if matrix[i][j] != 0:
-                addEdge(graph, i, j, matrix[i][j])
-    return graph
 
 def drawGraphCoor(graph):
     pos=nx.get_node_attributes(graph,'pos')

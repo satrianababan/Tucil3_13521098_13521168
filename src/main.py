@@ -14,6 +14,8 @@ if __name__ == "__main__":
         newNode = Node(i,listCoordinate[i])
         listNode.append(newNode)
     inputGraph = Graph(listNode, adjMatrix)
+    print("Visualisasi graf dengan representasi list ketetanggaan:")
+    inputGraph.displayAdjList()
 
     startNode = int(input("Masukkan simpul asal: "))
     goalNode = int(input("Masukkan simpul tujuan: "))
