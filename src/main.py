@@ -33,5 +33,5 @@ if __name__ == "__main__":
         else:
             print("Pilihan salah")
     except FileNotFoundError as e:
-        print("File tidak ditemukan")
+        print("File tidak ditemukan pada folder test")
         exit()
