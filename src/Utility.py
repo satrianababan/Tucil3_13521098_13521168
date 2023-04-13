@@ -13,9 +13,10 @@ def read_file(filename):
         matriksToFloat[i] = [float(x) for x in matriks[i].split()]
         CoorToFloat[i] = [float(x) for x in koordinat[i].split()]
         if(isSquareMatrix(matriksToFloat) and isSymmetricMatrix(matriksToFloat) and isNumberEqualsMatrix(matriksToFloat)):
-            return file,matriksToFloat,CoorToFloat
+            ...
         else:
-            raise Exception
+            ...
+        return file,matriksToFloat,CoorToFloat
 
 def isSquareMatrix(matrix:list[list[float]]) -> bool:
     square = True

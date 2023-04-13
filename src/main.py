@@ -12,11 +12,7 @@ if __name__ == "__main__":
     filename = input("Masukkan nama file: ")
     try:
         file = open("../test/" + filename)
-        try:
-            listName, adjMatrix, listCoordinate = read_file(file)
-        except Exception as e:
-            print("Input graf tidak valid")
-            exit()
+        listName, adjMatrix, listCoordinate = read_file(file)
         listNode = []
         for i in range (len(listCoordinate)):
             newNode = Node(i,listCoordinate[i])
@@ -54,5 +50,8 @@ if __name__ == "__main__":
         print("File tidak ditemukan pada folder test")
         exit()
     except ValueError as e:
+        print("Input graf tidak valid")
+        exit()
+    except IndexError as e:
         print("Input graf tidak valid")
         exit()
