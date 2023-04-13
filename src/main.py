@@ -52,3 +52,6 @@ if __name__ == "__main__":
     except ValueError as e:
         print("Input Graph tidak valid")
         exit()
+    except IndexError as e:
+            print("Input Graph Tidak Simetris")
+            exit()
