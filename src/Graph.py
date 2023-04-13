@@ -1,20 +1,25 @@
 from Node import *
 import networkx as nx
-# from pyvis.network import Network
-from Utility import *
+import matplotlib.pyplot as plt
+from typing import Any
+
 class Graph:
-    def __init__(self, nodes, adjMatrix):
+    def __init__(self, nodes, adjMatrix, listName):
         self.__nodes = nodes
         self.__adjMatrix = adjMatrix
+        self.__listName = listName
 
     def getNode(self,index:int) -> Node:
         return self.__nodes[index]
 
-    def getAdjMatrix(self):
+    def getAdjMatrix(self) -> Any:
         return self.__adjMatrix
     
-    def getListNode(self):
+    def getListNode(self) -> Any:
         return self.__nodes
+    
+    def getListName(self) -> Any:
+        return self.__listName
     
     def displayAdjList(self):
         adjMatrix = self.getAdjMatrix()
@@ -24,6 +29,7 @@ class Graph:
                 if(adjMatrix[i][j] != 0):
                     print(" --> " + str(j), end = '')
             print()
+
     def normalizeGraph(self):
         graph = nx.Graph()
         for i in range(len(self.getListNode())): 
@@ -33,29 +39,17 @@ class Graph:
                 if(self.getAdjMatrix()[j][k]!=0):
                     graph.add_edge(j, k, weight = float(self.getAdjMatrix()[j][k]) )
         return graph
-    # def draw_graph_koor(graph):
-    #     pos=nx.get_node_attributes(graph,'pos')
-    #     nx.draw(graph,pos,with_labels=True, font_weight='bold')
-    #     labels = nx.get_edge_attributes(graph, 'weight')
-    #     nx.draw_networkx_edge_labels(graph, pos, edge_labels=labels)
-    def drawGraph(self):
+
+    def drawInputGraph(self,outputName:str):
         graph = self.normalizeGraph()
         pos=nx.get_node_attributes(graph,'pos')
         nx.draw(graph,pos,with_labels=True, font_weight='bold')
         labels = nx.get_edge_attributes(graph, 'weight')
         nx.draw_networkx_edge_labels(graph, pos, edge_labels=labels)
+        plt.savefig(outputName)
         plt.show()
-    # def draw_graph_koor_color(graph,hasil,nama):
-        # pos=nx.get_node_attributes(graph,'pos')
-        # nx.draw(graph,pos,with_labels=True, font_weight='bold')
-        # labels = nx.get_edge_attributes(graph, 'weight')
-        # nx.draw_networkx_edge_labels(graph, pos, edge_labels=labels)
-        # listedge = []
-        # for i in range(len(hasil)-1):
-        #     edge = (nama[hasil[i]],nama[hasil[i+1]])
-        #     listedge.append(edge)
-        # nx.draw_networkx_edges(graph,pos,edgelist = listedge,edge_color="tab:red")
-    def drawGraphColor(self,Path):
+ 
+    def drawOutputGraph(self,Path:Any):
         graph = self.normalizeGraph()
         pos=nx.get_node_attributes(graph,'pos')
         nx.draw(graph,pos,with_labels=True, font_weight='bold')
@@ -66,20 +60,3 @@ class Graph:
             edge = (Path[i],Path[i+1])
             listedge.append(edge)
         nx.draw_networkx_edges(graph,pos,edgelist = listedge,edge_color="tab:red")
-        
-    def visualize(self, output_filename):
-        # g = Network(height="750px", width="100%", bgcolor="#222222", font_color="white")
-        g = nx.Graph()
-        # listNode = self.getListNode()
-        # for i in range(len(lisNode)):
-            # g.add_node(i, label=lisNode[i].getName())
-        # g.add_nodes(graph.nodes())
-        # g.add_edges()
-        adjMatrix = self.getAdjMatrix()
-        for i in range(len(adjMatrix)):
-            for j in range(len(adjMatrix[i])):
-                if(adjMatrix[i][j] != 0):
-                    g.add_edge(i, j)
-        nx.draw(g, with_labels= True)
-        # plt.savefig(output_filename)
-        plt.show()    
