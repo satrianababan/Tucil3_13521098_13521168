@@ -39,4 +39,4 @@ class Graph:
                 if(adjMatrix[i][j] != 0):
                     g.add_edge(i, j)
         nx.draw(g, with_labels= True)
-        plt.savefig("inputGraph.png")
+        plt.savefig(output_filename)    

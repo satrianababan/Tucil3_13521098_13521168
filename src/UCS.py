@@ -1,8 +1,8 @@
 import heapq
 from LinkedNode import *
 from Graph import *
-
-def uniformCostSearch(graph, startNode, goalNode):
+import networkx as nx
+def uniformCostSearch(graph, startNode, goalNode,outputFileName):
 
     liveNodes = []
     heapq.heappush(liveNodes, LinkedNode(startNode))
@@ -18,7 +18,8 @@ def uniformCostSearch(graph, startNode, goalNode):
                 path.append(expandNode.index)
                 expandNode = expandNode.parent
             path.reverse()
-            return displayPath(graph,startNode,goalNode,path)
+            # return displayPath(graph,startNode,goalNode,path)
+            return showPath(graph,path,outputFileName)
 
         visitedNodes.add(expandNode.index)
 
@@ -28,7 +29,7 @@ def uniformCostSearch(graph, startNode, goalNode):
                 heapq.heappush(liveNodes, LinkedNode(i, expandNode, new_path_cost))
     return displayPathNotFound()
 
-def displayPath(graph,startNode,goalNode,path):
+def displayPath(graph:Graph,startNode:int,goalNode:int,path):
     print(f"Lintasan terpendek dari simpul {startNode} ke {goalNode} adalah ",end='')
     i = 0
     while(i < len(path)):
@@ -40,3 +41,14 @@ def displayPath(graph,startNode,goalNode,path):
 
 def displayPathNotFound():
     print("Tidak ada lintasan dari simpul asal ke simpul tujuan")
+
+def showPath(graph,path,outputFilename):
+    G = nx.erdos_renyi_graph(20,0.1)
+    listNode = graph.getListNode()
+    listNodeColor = []
+    for i in range(len(listNode)):
+        listNodeColor.append('blue')
+    for nodePath in path:
+        listNodeColor[nodePath] = 'red'
+    nx.draw(G, node_color=listNodeColor, with_labels=True)
+    plt.savefig(outputFilename) 
