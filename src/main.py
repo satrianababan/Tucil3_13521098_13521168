@@ -12,7 +12,11 @@ if __name__ == "__main__":
     filename = input("Masukkan nama file: ")
     try:
         file = open("../test/" + filename)
-        listName, adjMatrix, listCoordinate = read_file(file)
+        try:
+            listName, adjMatrix, listCoordinate = read_file(file)
+        except Exception as e:
+            print("Input graf tidak valid")
+            exit()
         listNode = []
         for i in range (len(listCoordinate)):
             newNode = Node(i,listCoordinate[i])
@@ -33,7 +37,7 @@ if __name__ == "__main__":
         try:
             goalNode = int(input("Masukkan simpul tujuan: "))
         except IndexError as e:
-            print("simpul tujuan tidak ada pada graf")
+            print("Simpul tujuan tidak ada pada graf")
             exit()
 
         print("Pilih metode yang ingin digunakan:")
@@ -50,8 +54,5 @@ if __name__ == "__main__":
         print("File tidak ditemukan pada folder test")
         exit()
     except ValueError as e:
-        print("Input Graph tidak valid")
+        print("Input graf tidak valid")
         exit()
-    except IndexError as e:
-            print("Input Graph Tidak Simetris")
-            exit()

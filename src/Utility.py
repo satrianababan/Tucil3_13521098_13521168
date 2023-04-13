@@ -12,7 +12,10 @@ def read_file(filename):
         koordinat.append(koor)
         matriksToFloat[i] = [float(x) for x in matriks[i].split()]
         CoorToFloat[i] = [float(x) for x in koordinat[i].split()]
-    return file,matriksToFloat,CoorToFloat
+        if(isSquareMatrix(matriksToFloat) and isSymmetricMatrix(matriksToFloat) and isNumberEqualsMatrix(matriksToFloat)):
+            return file,matriksToFloat,CoorToFloat
+        else:
+            raise Exception
 
 def isSquareMatrix(matrix:list[list[float]]) -> bool:
     square = True
@@ -25,6 +28,7 @@ def isSquareMatrix(matrix:list[list[float]]) -> bool:
         while(i < len(matrix) and square):
             if (len(matrix[i]) != columnCount):
                 square = False
+            i = i + 1
     return square
 
 def isNumberEqualsMatrix(number:int,matrix:list[list[int]]) -> bool:
@@ -32,3 +36,15 @@ def isNumberEqualsMatrix(number:int,matrix:list[list[int]]) -> bool:
         return True
     else:
         return False
+    
+def isSymmetricMatrix(matrix:list[list[float]]) -> bool:
+    symmetric = True
+    i = 0
+    while (i < len(matrix) and symmetric):
+        j = 0
+        while(j < len(matrix[i]) and symmetric):
+            if(matrix[i][j] != matrix[j][i]):
+                symmetric = False
+            j = j + 1
+        i = i + 1
+    return symmetric
