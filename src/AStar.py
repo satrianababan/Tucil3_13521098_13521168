@@ -1,9 +1,7 @@
 import heapq
-from Node import *
 from LinkedNode import *
 from Graph import *
 from Utility import *
-from Node import *
 
 def aStar(graph:Graph, coordinate,startNode:int, goalNode:int):
 
@@ -21,7 +19,7 @@ def aStar(graph:Graph, coordinate,startNode:int, goalNode:int):
                 path.append(expandNode.index)
                 expandNode = expandNode.parent
             path.reverse()
-            return ShowPath(graph, path, startNode, goalNode)
+            return showPath(graph, path, startNode, goalNode)
         
         visitedNodes.add(expandNode.index)
 
@@ -39,20 +37,10 @@ def aStar(graph:Graph, coordinate,startNode:int, goalNode:int):
                 heapq.heappush(liveNodes, LinkedNode(i, expandNode, new_path_cost))
     return displayPathNotFound()
 
-def displayPath(graph,startNode,goalNode,path):
-    print(f"Lintasan terpendek dari simpul {startNode} ke {goalNode} adalah ",end='')
-    i = 0
-    while(i < len(path)):
-        print(path[i],end='')
-        i = i + 1
-        if (i < len(path)):
-            print(" --> ", end='')
-    print(f" dengan panjang lintasan sebesar {sum(graph.getAdjMatrix()[path[i-1]][path[i]] for i in range(1, len(path)))}")
-
 def displayPathNotFound():
     print("Tidak ada lintasan dari simpul asal ke simpul tujuan")
     
-def ShowPath(graph:Graph,path, startNode, goalNode):
+def showPath(graph:Graph,path:list(int), startNode:int, goalNode:int):
     print(f"Lintasan terpendek dari simpul {startNode} ke {goalNode} adalah ",end='')
     i = 0
     while(i < len(path)):
